@@ -52,11 +52,11 @@ In visualization sciences, datasets are constantly increasing in size and comple
 Computational biology already offers the way to generate large and static models of cell biology, such as viruses or entire cells on the atomic level.
 However biologists are beginning to struggle with the viewing of these large scale datasets, and the tools they are usually accustomed to do not suffice anymore.
 Foreseeing the future increase of their dataset they would need the ability to quickly render billions of atoms while the current state of the art tools are only able to render up to hundreads millions of atoms on commodity hardware.
-The visualization of such data in real-time could also serve other purposes than science-driven data exploration, it could also be used to showcase the data to a lay audience in a museum for instance.
+The visualization of such data in real-time could additionally serve other purposes than science-driven data exploration and could also be used to interactively showcase cell biology to a lay audience for instance.
 
 In the literature there are already a few state-of-the techniques that allow fast rendering of billions of atoms but to our knowledge those technique are still not accessible to biology researchers because they remained in the prototyping stage.
-Furthermore, those techniques have only showcased rendering of proteins so far while living organisms also features different types of biochemical elements, such as bi-lipid membranes and DNA/RNA
-Also the aforementioned technique started to reach the limits of their capabilities when displaying several billions of atoms, demonstrating rather low frame rate which would be critical for interactive showcasing.
+Furthermore, those techniques have only showcased rendering of simple structures so far such as proteins or fibers while living organisms also features different types of biochemical elements, such as bi-lipid membranes and DNA/RNA
+Also the aforementioned techniques started to reach the limits of their capabilities when displaying several billions of atoms, demonstrating rather low frame rate which would be critical for interactive showcasing.
 Finally, despite the simplification schemes offered by those techniques in order to accelerate the rendering speed they still lack the means to perform shape simplification which would be preferred when observing a large structure in its entirety.
 
 In order to reach a maximum number of people we which to implement our tool in the most familiar and user friendly framework available.
