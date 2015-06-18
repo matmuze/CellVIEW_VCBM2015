@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.24)  16 JUN 2015 17:21
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.24)  18 JUN 2015 23:57
 entering extended mode
 **EGauthorGuidelines-conf-sub.tex
-(D:\Papers\CellVIEW_VCBM2015\EGauthorGuidelines-conf-sub.tex
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,7 +13,7 @@ german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(D:\Papers\CellVIEW_VCBM2015\egpubl.cls
+(D:\Papers\CellVIEW_VCBM2015\trunk\egpubl.cls
 Document Class: egpubl 2013/07/17 Document Style for EG Publications v3.56
 \c@table=\count79
 \c@figure=\count80
@@ -33,8 +33,8 @@ Document Class: egpubl 2013/07/17 Document Style for EG Publications v3.56
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
-(D:\Papers\CellVIEW_VCBM2015\EGauthorGuidelines-conf-sub.lbl))
-(D:\Papers\CellVIEW_VCBM2015\eg2014.sty)
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.lbl))
+(D:\Papers\CellVIEW_VCBM2015\trunk\eg2014.sty)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -189,7 +189,7 @@ File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.sty"
 Package: t1enc 1994/06/01 Standard LaTeX package
 )
-(D:\Papers\CellVIEW_VCBM2015\dfadobe.sty
+(D:\Papers\CellVIEW_VCBM2015\trunk\dfadobe.sty
 Package: dfadobe 2000/03/05 v1.4 T1-encoded Times (except symbols), Courier, He
 lvetica (at 90\%) + math package
 LaTeX Font Info:    Redeclaring symbol font `operators' on input line 14.
@@ -220,17 +220,17 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/ptm/m/it on input line 20.
 
-(D:\Papers\CellVIEW_VCBM2015\dfT1ptm.fd
+(D:\Papers\CellVIEW_VCBM2015\trunk\dfT1ptm.fd
 File: dfT1ptm.fd 2000/03/05 DF - Fontinst v1.6 font definitions for T1/ptm.
 )
-(D:\Papers\CellVIEW_VCBM2015\dfT1phv.fd
+(D:\Papers\CellVIEW_VCBM2015\trunk\dfT1phv.fd
 File: dfT1phv.fd 1997/12/02 Fontinst v1.6 font definitions for T1/phv scaled to
  90\%.
 )
-(D:\Papers\CellVIEW_VCBM2015\dfT1pcr.fd
+(D:\Papers\CellVIEW_VCBM2015\trunk\dfT1pcr.fd
 File: dfT1pcr.fd 2000/03/05 DF - Fontinst v1.6 font definitions for T1/pcr.
 ))
-(D:\Papers\CellVIEW_VCBM2015\egweblnk.sty
+(D:\Papers\CellVIEW_VCBM2015\trunk\egweblnk.sty
 Package: egweblnk 2004/10/29 v2.2 DF's support for http web links in class egpu
 bl
 )
@@ -239,8 +239,8 @@ LaTeX Info: Redefining \cite on input line 302.
 LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 )
-(D:\Papers\CellVIEW_VCBM2015\EGauthorGuidelines-body.inc
-(D:\Papers\CellVIEW_VCBM2015\EGauthorGuidelines-conf-sub.aux)
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-body.inc
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
 LaTeX Font Info:    ... okay on input line 23.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
@@ -335,41 +335,71 @@ Underfull \hbox (badness 1552) in paragraph at lines 42--45
 g to ACM CCS)\T1/ptm/m/n/9 :  I.3.3 [Com-puter Graph-ics]: Pic-ture/Image
  []
 
-[1{C:/Users/Mathieu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{C:/Users/Mathieu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<Figures/Picture2.png, id=28, 891.8118pt x 304.4976pt>
+File: Figures/Picture2.png Graphic file (type png)
 
- [2]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<use Figures/Picture2.png>
+Package pdftex.def Info: Figures/Picture2.png used on input line 156.
+(pdftex.def)             Requested size: 456.0pt x 155.69594pt.
+ [2] [3 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture2.png>] [4] <Figures/
+Picture4.png, id=79, 515.526pt x 475.0548pt>
+File: Figures/Picture4.png Graphic file (type png)
 
- [3]
-[4] [5] [6]
-No file EGauthorGuidelines-conf-sub.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 460.
-[7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 460.
- (D:\Papers\CellVIEW_VCBM2015\EGauthorGuidelines-conf-sub.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 460.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 460.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 460.
+<use Figures/Picture4.png>
+Package pdftex.def Info: Figures/Picture4.png used on input line 275.
+(pdftex.def)             Requested size: 172.80066pt x 159.23314pt.
+ [5 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture4.png>] <Figures/Picture3
+.png, id=88, 952.5186pt x 203.8014pt>
+File: Figures/Picture3.png Graphic file (type png)
+
+<use Figures/Picture3.png>
+Package pdftex.def Info: Figures/Picture3.png used on input line 357.
+(pdftex.def)             Requested size: 456.0pt x 97.56544pt.
+ [6]
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.bbl
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.brf)
+\tf@brf=\write3
+ [7 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture3.png>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 467.
+ [8
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 467.
+
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 467.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 467.
+Package rerunfilecheck Info: File `EGauthorGuidelines-conf-sub.brf' has not cha
+nged.
+(rerunfilecheck)             Checksum: 2C7B613FAF727ACC1A38B04A391100E1;1443.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 467.
  ) ) 
 Here is how much of TeX's memory you used:
- 5626 strings out of 493921
- 84182 string characters out of 3144870
- 173853 words of memory out of 3000000
- 8839 multiletter control sequences out of 15000+200000
- 32971 words of font info for 47 fonts, out of 3000000 for 9000
+ 5747 strings out of 493921
+ 86772 string characters out of 3144870
+ 173588 words of memory out of 3000000
+ 8924 multiletter control sequences out of 15000+200000
+ 44287 words of font info for 64 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 32i,10n,24p,416b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,10n,27p,376b,331s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX
- 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on EGauthorGuidelines-conf-sub.pdf (7 pages, 89751 bytes).
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on EGauthorGuidelines-conf-sub.pdf (8 pages, 1115907 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 25 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 171 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
