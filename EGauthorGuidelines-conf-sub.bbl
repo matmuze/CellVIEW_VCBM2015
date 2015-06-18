@@ -1,0 +1,86 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{\uppercase{LMWPV15}}
+
+\bibitem[D{\'e}c05]{decoret2005n}
+\textsc{D{\'e}coret X.}:
+\newblock N-buffers for efficient depth map query.
+\newblock In \emph{Computer Graphics Forum} (2005), vol.~24, Wiley Online
+  Library, pp.~393--400.
+
+\bibitem[DN09]{decaudin2009volumetric}
+\textsc{Decaudin P., Neyret F.}:
+\newblock Volumetric billboards.
+\newblock In \emph{Computer Graphics Forum} (2009), vol.~28, Wiley Online
+  Library, pp.~2079--2089.
+
+\bibitem[FKE13]{falk2013atomistic}
+\textsc{Falk M., Krone M., Ertl T.}:
+\newblock Atomistic visualization of mesoscopic whole-cell simulations using
+  ray-casted instancing.
+\newblock In \emph{Computer Graphics Forum} (2013), vol.~32, Wiley Online
+  Library, pp.~195--206.
+
+\bibitem[GKM93]{greene1993hierarchical}
+\textsc{Greene N., Kass M., Miller G.}:
+\newblock Hierarchical z-buffer visibility.
+\newblock In \emph{Proceedings of the 20th annual conference on Computer
+  graphics and interactive techniques} (1993), ACM, pp.~231--238.
+
+\bibitem[GKM{\etalchar{*}}15]{grottel2015megamol}
+\textsc{Grottel S., Krone M., Muller C., Reina G., Ertl T.}:
+\newblock Megamol—a prototyping framework for particle-based visualization.
+\newblock \emph{Visualization and Computer Graphics, IEEE Transactions on 21},
+  2 (2015), 201--214.
+
+\bibitem[GRDE10]{grottel2010coherent}
+\textsc{Grottel S., Reina G., Dachsbacher C., Ertl T.}:
+\newblock Coherent culling and shading for large molecular dynamics
+  visualization.
+\newblock In \emph{Computer Graphics Forum} (2010), vol.~29, Wiley Online
+  Library, pp.~953--962.
+
+\bibitem[KPV{\etalchar{*}}14]{kolesar2014illustrating}
+\textsc{Kolesar I., Parulek J., Viola I., Bruckner S., Stavrum A.-K., Hauser
+  H.}:
+\newblock Illustrating polymerization using three-level model fusion.
+\newblock \emph{arXiv preprint arXiv:1407.3757} (2014).
+
+\bibitem[LBH12]{lindow2012interactive}
+\textsc{Lindow N., Baum D., Hege H.-C.}:
+\newblock Interactive rendering of materials and biological structures on
+  atomic and nanoscopic scale.
+\newblock In \emph{Computer Graphics Forum} (2012), vol.~31, Wiley Online
+  Library, pp.~1325--1334.
+
+\bibitem[LMPSV14]{le2014illustrative}
+\textsc{Le~Muzic M., Parulek J., Stavrum A.-K., Viola I.}:
+\newblock Illustrative visualization of molecular reactions using omniscient
+  intelligence and passive agents.
+\newblock In \emph{Computer Graphics Forum} (2014), vol.~33, Wiley Online
+  Library, pp.~141--150.
+
+\bibitem[LMWPV15]{pacificvis15illustrative}
+\textsc{Le~Muzic M., Waldner M., Parulek J., Viola I.}:
+\newblock Illustrative timelapse: A technique for illustrative visualization of
+  particle-based simulations.
+\newblock In \emph{IEEE Pacific Visualization Symposium (PacificVis 2015)}
+  (2015).
+
+\bibitem[LTDS{\etalchar{*}}13]{lv2013game}
+\textsc{Lv Z., Tek A., Da~Silva F., Empereur-Mot C., Chavent M., Baaden M.}:
+\newblock Game on, science-how video game technology may help biologists tackle
+  visualization challenges.
+\newblock \emph{PloS one 8}, 3 (2013), 57990.
+
+\bibitem[LVRH07]{lampe2007two}
+\textsc{Lampe O.~D., Viola I., Reuter N., Hauser H.}:
+\newblock Two-level approach to efficient visualization of protein dynamics.
+\newblock \emph{Visualization and Computer Graphics, IEEE Transactions on 13},
+  6 (2007), 1616--1623.
+
+\bibitem[SZA{\etalchar{*}}14]{shepherd2014exploring}
+\textsc{Shepherd J.~J., Zhou L., Arndt W., Zhang Y., Zheng W.~J., Tang J.}:
+\newblock Exploring genomes with a game engine.
+\newblock \emph{Faraday discussions 169} (2014), 443--453.
+
+\end{thebibliography}
