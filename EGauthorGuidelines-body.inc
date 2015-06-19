@@ -124,30 +124,30 @@ There is a multitude of frameworks to display biomolecular data, however most of
 It is possible using efficient ray tracing approaches to interactively render large-scale particle data on super-computers, the main limitation being the size of the memory.
 However such hardware is unfortunately not accessible to most people for obvious reasons.
 
-On the other hand commodity graphics hardware packages impressive computing capabilities on one board and which are have been used by Grottel et al. \cite{grottel2010coherent} to display large scale datasets. 
+On the other hand, commodity graphics hardware packages impressive computing capabilities on one board and which are have been used by Grottel et al. \cite{grottel2010coherent} to display large-scale datasets. 
 The acceleration is based on an efficient two-level occlusion culling scheme and have demonstrated the rendering of hundreds of millions of atoms in real-time. 
-On the first level they cull entire groups of atoms that are not visible on screen at a given frame via hardware occlusion queries (HOQ).
-On the second level they use hierarchical z-buffers to cull hidden individual atoms within the visible groups of particles. 
-This method is rather designed for generic purpose particle-data, with biomolecular data however often exhibits repetitive structures which could be used for efficient instanced rendering.
+On the first level they cull entire groups of atoms that are hidden by other elements via hardware occlusion queries (HOQ).
+On the second level they use hierarchical z-buffers (HZB) to cull individual atoms that are hidden within the visible groups of particles. 
+This method is rather designed for generic purpose particle-data, biomolecular data however often exhibits repetitive structures which could be displayed more efficiently via instanced rendering.
 
 Lindow et al. \cite{lindow2012interactive} have first introduced a method capable of fast rendering of large-scale atomic data up to several billions of atoms.
-Rather than transferring the data from CPU to GPU they store the structure of each type of molecule only once and utilize instancing to repeat these structures in the scene.
-For each type of protein a 3D grid structure containing the atoms positions is initially filled and then stored on the GPU memory.
-Upon the rendering, the bounding box of each instance is drawn and individually raycasted similarly to volumetric billboards \cite{decaudin2009volumetric}.
+Rather than transferring the data from CPU to GPU every frame they store the structure of each type of molecule only once and utilize instancing to repeat these structures in the scene.
+For each type of protein a 3D grid structure containing the atoms positions is created and then stored on the GPU memory.
+Upon the rendering, the bounding boxes of the instances are drawn and individually raycasted similarly to volumetric billboards \cite{decaudin2009volumetric}.
 
 Subsequently Falk et al. \cite{falk2013atomistic} presented a similar approach with improved depth culling and hierarchical ray casting for impostors that are located far away and do not require a full grid traversal.
 Although this implementation features depth culling, their method only operates on the fragment level, while they could have probably benefited from a culling on the instance level too. 
-With their new improvement they managed to obtain 3.6 fps in full HD resolution for 25 billions of atoms on a NVidia GTX 580 while Lindow et al. managed to get around 3 fps for 10 billions atoms in HD resolution on a n NVIDIA GTX 285. 
+With their new improvement they managed to obtain 3.6 fps in full HD resolution for 25 billions of atoms on a NVidia GTX 580 while Lindow et al. managed to get around 3 fps for 10 billions atoms in HD resolution on a NVIDIA GTX 285. 
 
 Le Muzic et al \cite{le2014illustrative}, introduced another technique for fast rendering of large particle-based datasets using the GPU rasterization pipeline instead.
 They were able to render up to 30 billions of atoms at 10 fps in full HD resolution on a NVidia GTX Titan.
-They utilize tessellation shaders to inject atoms on-the-fly in the GPU pipeline in a similarly to the technique of Lampe et al. \cite{lampe2007two}.
+They utilize tessellation shaders to inject atoms on-the-fly in the GPU pipeline similarly to the technique of Lampe et al. \cite{lampe2007two}.
 In order to increase the rendering speed they dynamically reduce the number of injected atoms accordingly to the camera depth.
 To reduce the geometry processing, for each molecule they discard atoms uniformly along the protein chain and increase the radius of remaining atoms to compensate the volume loss.
-This level-of-detail scheme offers decent results for low degrees of simplification but it does not truly guaranty to preserve the overall shape of the molecule for highly simplified structures.
+This level-of-detail scheme offers decent results for low degrees of simplification but it does not truly guaranty to preserve the overall shape of molecules for highly simplified structures.
 
 We base our work on the later technique mostly because of its versatility and its ease of implementation.
-We introduce new set of technique that are improving rendering time over the previous work by a factor of 600%.
+We introduce new set of technique that are improving rendering time over the previous work by a ratio of 600 percent.
 Additionally we introduce a new level-of-detail scheme that preserves the original shape for highly simplified protein structures and which provides and more accurate depiction of the scene.
 Finally we demonstrate the use of this technique to display other types of structures such as nucleic acids strands and also large bi-lipid membranes that do not feature repetitive structures.
 
@@ -161,7 +161,7 @@ Finally we demonstrate the use of this technique to display other types of struc
 \subsection{Game Engines and Biomolecular Visualization}
 
 The visualization of biomolecluar structures often leads to the use of 3D graphics, preferably in real-time for interactive exploration. 
-To facilitate the development of such applications, many generic visualization framework exists, as well as frameworks dedicated to biomolecular visualization only [].
+To facilitate the development of such applications, many generic visualization framework exists \cite{ahrens200536}, as well as frameworks dedicated to biomolecular visualization only \cite{PyMOL} \cite{HUMP96}.
 However it has been highlighted that these solution usually lack of flexibility and access to low level-api graphics features which is crucial for robust GPU computing \cite{grottel2015megamol}.
 Although game engines are not yet the perfect all-in-one solution for 3D graphics applications they are a good contenders to traditional visualization framework nevertheless.
 
@@ -181,9 +181,11 @@ Thus coexisting with the engine tool set and providing us a nice set of perks wh
 
 \section{Pipeline Overview}
 
+Although our work is directly embedded in the game engine toolset, we do not rely on the available rendering pipeline because it is mostly designed for mesh data.
+Therefore we implement a custom pipeline for efficient rendering of large particle data.
 Before proceeding with the description of the pipeline we deemed important to clarify the way we arrange the data on the GPU.
 There are several types of buffers which we store on the GPU: 
-On the one hand we have information relative to the groups of atoms, these groups represent either entire proteins or DNA segments or generic group of atoms.
+On the one hand we have information relative to the groups of atoms, these groups represent either entire proteins, DNA segments or generic group of atoms.
 This information is stored in large GPU buffer and include the position, rotation and various information such as the type or the culling flags.
 On the other hand we have the atomic data which is stored in a another large buffer and which includes position and atom types only.
 

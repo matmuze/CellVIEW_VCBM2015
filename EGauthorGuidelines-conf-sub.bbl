@@ -1,6 +1,11 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{\uppercase{LMWPV15}}
 
+\bibitem[AGL05]{ahrens200536}
+\textsc{Ahrens J., Geveci B., Law C.}:
+\newblock 36 paraview: An end-user tool for large-data visualization.
+\newblock \emph{The Visualization Handbook} (2005), 717.
+
 \bibitem[D{\'e}c05]{decoret2005n}
 \textsc{D{\'e}coret X.}:
 \newblock N-buffers for efficient depth map query.
@@ -38,6 +43,11 @@
   visualization.
 \newblock In \emph{Computer Graphics Forum} (2010), vol.~29, Wiley Online
   Library, pp.~953--962.
+
+\bibitem[HDS96]{HUMP96}
+\textsc{Humphrey W., Dalke A., Schulten K.}:
+\newblock {VMD} -- {V}isual {M}olecular {D}ynamics.
+\newblock \emph{Journal of Molecular Graphics 14} (1996), 33--38.
 
 \bibitem[KPV{\etalchar{*}}14]{kolesar2014illustrating}
 \textsc{Kolesar I., Parulek J., Viola I., Bruckner S., Stavrum A.-K., Hauser
@@ -77,6 +87,11 @@
 \newblock Two-level approach to efficient visualization of protein dynamics.
 \newblock \emph{Visualization and Computer Graphics, IEEE Transactions on 13},
   6 (2007), 1616--1623.
+
+\bibitem[{Sch}10]{PyMOL}
+\textsc{{Schr\"odinger, LLC}}:
+\newblock The {PyMOL} molecular graphics system, version~1.3r1.
+\newblock August 2010.
 
 \bibitem[SZA{\etalchar{*}}14]{shepherd2014exploring}
 \textsc{Shepherd J.~J., Zhou L., Arndt W., Zhang Y., Zheng W.~J., Tang J.}:
