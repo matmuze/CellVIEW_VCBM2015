@@ -287,27 +287,11 @@ Results of our twofold LOD can be seen in the supplementary video material.
 
 \begin{figure}
 \centering
-\begin{subfigure}[b]{0.3\textwidth}
-\includegraphics[width=\textwidth]{gull}
-\caption{A gull}
-\label{fig:gull}
-\end{subfigure}
-~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-%(or a blank line to force the subfigure onto a new line)
-\begin{subfigure}[b]{0.3\textwidth}
-\includegraphics[width=\textwidth]{tiger}
-\caption{A tiger}
-\label{fig:tiger}
-\end{subfigure}
-~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-%(or a blank line to force the subfigure onto a new line)
-\begin{subfigure}[b]{0.3\textwidth}
-\includegraphics[width=\textwidth]{mouse}
-\caption{A mouse}
-\label{fig:mouse}
-\end{subfigure}
-\caption{Pictures of animals}\label{fig:animals}
+\includegraphics[width=0.7\linewidth]{Figures/Picture9}
+\caption{}
+\label{fig:Picture9}
 \end{figure}
+
 %-------------------------------------------------------------------------
 \section{Dynamic DNA Generation}
 
