@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.24)  19 JUN 2015 14:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.24)  21 JUN 2015 18:43
 entering extended mode
 **EGauthorGuidelines-conf-sub.tex
 (D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.tex
@@ -335,72 +335,103 @@ Underfull \hbox (badness 1552) in paragraph at lines 42--45
 g to ACM CCS)\T1/ptm/m/n/9 :  I.3.3 [Com-puter Graph-ics]: Pic-ture/Image
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1{C:/Users/Mathieu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+[1{C:/Users/Mathieu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-<Figures/Picture2.png, id=28, 891.8118pt x 304.4976pt>
-File: Figures/Picture2.png Graphic file (type png)
+<Figures/Untitled.png, id=25, 708.39656pt x 413.29407pt>
+File: Figures/Untitled.png Graphic file (type png)
 
-<use Figures/Picture2.png>
-Package pdftex.def Info: Figures/Picture2.png used on input line 156.
-(pdftex.def)             Requested size: 456.0pt x 155.69594pt.
- [2]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<use Figures/Untitled.png>
+Package pdftex.def Info: Figures/Untitled.png used on input line 92.
+(pdftex.def)             Requested size: 216.0pt x 126.0198pt.
 
- [3 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture2.png>] [4]
-<Figures/Picture4.png, id=85, 515.526pt x 475.0548pt>
+<Figures/Picture7.png, id=26, 1075.8594pt x 327.1422pt>
+File: Figures/Picture7.png Graphic file (type png)
+
+<use Figures/Picture7.png>
+Package pdftex.def Info: Figures/Picture7.png used on input line 100.
+(pdftex.def)             Requested size: 410.39722pt x 124.78954pt.
+
+Underfull \hbox (badness 6995) in paragraph at lines 104--117
+\T1/ptm/b/n/9 Large-Scale Molec-u-lar vi-su-al-iza-tion \T1/ptm/m/n/9 Lin-dow e
+t al.
+ []
+
+[2 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Untitled.png>] [3 <D:/Papers/Cell
+VIEW_VCBM2015/trunk/Figures/Picture7.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 178--184
+
+ []
+
+<Figures/Picture5.png, id=77, 471.2004pt x 283.7802pt>
+File: Figures/Picture5.png Graphic file (type png)
+
+<use Figures/Picture5.png>
+Package pdftex.def Info: Figures/Picture5.png used on input line 223.
+(pdftex.def)             Requested size: 86.39868pt x 52.03085pt.
+
+<Figures/Picture4.png, id=78, 515.526pt x 475.0548pt>
 File: Figures/Picture4.png Graphic file (type png)
 
 <use Figures/Picture4.png>
-Package pdftex.def Info: Figures/Picture4.png used on input line 277.
+Package pdftex.def Info: Figures/Picture4.png used on input line 252.
 (pdftex.def)             Requested size: 172.80066pt x 159.23314pt.
- [5 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture4.png>] <Figures/Picture3
-.png, id=94, 952.5186pt x 203.8014pt>
+ [4 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture5.png>] <Figures/Picture3
+.png, id=100, 952.5186pt x 203.8014pt>
 File: Figures/Picture3.png Graphic file (type png)
 
 <use Figures/Picture3.png>
-Package pdftex.def Info: Figures/Picture3.png used on input line 359.
+Package pdftex.def Info: Figures/Picture3.png used on input line 297.
 (pdftex.def)             Requested size: 456.0pt x 97.56544pt.
- [6] [7 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture3.png>] (D:\Papers\Ce
-llVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.bbl (D:\Papers\CellVIEW_VCBM2
-015\trunk\EGauthorGuidelines-conf-sub.brf)
-\tf@brf=\write3
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 469.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 469.
+ [5 <D:/Papers/CellVIEW_VCBM2015/trunk/Figures/Picture4.png>] [6 <D:/Papers/Cel
+lVIEW_VCBM2015/trunk/Figures/Picture3.png>]
+Underfull \hbox (badness 1337) in paragraph at lines 384--386
+[]\T1/ptm/b/n/9 Maintenance \T1/ptm/m/n/9 Unity3D is a very pop-u-lar frame-wor
+k
+ []
 
-(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 469.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 469.
+[7] [8] (D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.bbl
+(D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.brf)
+\tf@brf=\write3
+
+Underfull \hbox (badness 2302) in paragraph at lines 62--62
+[]\T1/ptm/m/sc/8 Hornus S., Lévy B., Lar-iv-ière D., Four-
+ []
+
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 476.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 476.
+ (D:\Papers\CellVIEW_VCBM2015\trunk\EGauthorGuidelines-conf-sub.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 476.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 476.
 Package rerunfilecheck Info: File `EGauthorGuidelines-conf-sub.brf' has not cha
 nged.
-(rerunfilecheck)             Checksum: 045644EF3DF0C9B5A11A967CA1E66EE4;1586.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 469.
+(rerunfilecheck)             Checksum: 911501ADC94BAB3E4E5F259351B4F244;1821.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 476.
  ) ) 
 Here is how much of TeX's memory you used:
- 5762 strings out of 493921
- 86944 string characters out of 3144870
- 173691 words of memory out of 3000000
- 8936 multiletter control sequences out of 15000+200000
+ 5827 strings out of 493921
+ 88215 string characters out of 3144870
+ 176883 words of memory out of 3000000
+ 8974 multiletter control sequences out of 15000+200000
  44287 words of font info for 64 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 32i,10n,27p,376b,319s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,10n,24p,580b,346s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Prog
 ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program F
-iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program File
-s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX
- 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/urw/times/utmri8a.pfb>
-Output written on EGauthorGuidelines-conf-sub.pdf (8 pages, 1118373 bytes).
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/Mathieu/AppD
+ata/Roaming/MiKTeX/2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files (x86)/
+MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/
+fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1
+/urw/times/utmri8a.pfb>
+Output written on EGauthorGuidelines-conf-sub.pdf (9 pages, 2713952 bytes).
 PDF statistics:
- 180 PDF objects out of 1000 (max. 8388607)
- 47 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 245 PDF objects out of 1000 (max. 8388607)
+ 72 named destinations out of 1000 (max. 500000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

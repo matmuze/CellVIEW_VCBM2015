@@ -1,11 +1,6 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{\uppercase{LMWPV15}}
 
-\bibitem[AGL05]{ahrens200536}
-\textsc{Ahrens J., Geveci B., Law C.}:
-\newblock 36 paraview: An end-user tool for large-data visualization.
-\newblock \emph{The Visualization Handbook} (2005), 717.
-
 \bibitem[D{\'e}c05]{decoret2005n}
 \textsc{D{\'e}coret X.}:
 \newblock N-buffers for efficient depth map query.
@@ -18,12 +13,22 @@
 \newblock In \emph{Computer Graphics Forum} (2009), vol.~28, Wiley Online
   Library, pp.~2079--2089.
 
+\bibitem[ESH13]{eichelbaum2013pointao}
+\textsc{Eichelbaum S., Scheuermann G., Hlawitschka M.}:
+\newblock Pointao—improved ambient occlusion for point-based visualization.
+
 \bibitem[FKE13]{falk2013atomistic}
 \textsc{Falk M., Krone M., Ertl T.}:
 \newblock Atomistic visualization of mesoscopic whole-cell simulations using
   ray-casted instancing.
 \newblock In \emph{Computer Graphics Forum} (2013), vol.~32, Wiley Online
   Library, pp.~195--206.
+
+\bibitem[GBP04]{guennebaud2004deferred}
+\textsc{Guennebaud G., Barthe L., Paulin M.}:
+\newblock Deferred splatting.
+\newblock In \emph{Computer Graphics Forum} (2004), vol.~23, Wiley Online
+  Library, pp.~653--660.
 
 \bibitem[GKM93]{greene1993hierarchical}
 \textsc{Greene N., Kass M., Miller G.}:
@@ -37,6 +42,12 @@
 \newblock \emph{Visualization and Computer Graphics, IEEE Transactions on 21},
   2 (2015), 201--214.
 
+\bibitem[GKSE12]{grottel2012object}
+\textsc{Grottel S., Krone M., Scharnowski K., Ertl T.}:
+\newblock Object-space ambient occlusion for molecular dynamics.
+\newblock In \emph{Pacific Visualization Symposium (PacificVis), 2012 IEEE}
+  (2012), IEEE, pp.~209--216.
+
 \bibitem[GRDE10]{grottel2010coherent}
 \textsc{Grottel S., Reina G., Dachsbacher C., Ertl T.}:
 \newblock Coherent culling and shading for large molecular dynamics
@@ -44,10 +55,23 @@
 \newblock In \emph{Computer Graphics Forum} (2010), vol.~29, Wiley Online
   Library, pp.~953--962.
 
-\bibitem[HDS96]{HUMP96}
-\textsc{Humphrey W., Dalke A., Schulten K.}:
-\newblock {VMD} -- {V}isual {M}olecular {D}ynamics.
-\newblock \emph{Journal of Molecular Graphics 14} (1996), 33--38.
+\bibitem[HLLF13]{hornus2013easy}
+\textsc{Hornus S., L{\'e}vy B., Larivi{\`e}re D., Fourmentin E.}:
+\newblock Easy dna modeling and more with graphitelifeexplorer.
+\newblock \emph{PloS one 8}, 1 (2013), 53609.
+
+\bibitem[JAAA{\etalchar{*}}15]{johnson2015cellpack}
+\textsc{Johnson G.~T., Autin L., Al-Alusi M., Goodsell D.~S., Sanner M.~F.,
+  Olson A.~J.}:
+\newblock cellpack: a virtual mesoscope to model and visualize structural
+  systems biology.
+\newblock \emph{Nature methods 12}, 1 (2015), 85--91.
+
+\bibitem[KBE09]{krone2009interactive}
+\textsc{Krone M., Bidmon K., Ertl T.}:
+\newblock Interactive visualization of molecular surface dynamics.
+\newblock \emph{Visualization and Computer Graphics, IEEE Transactions on 15},
+  6 (2009), 1391--1398.
 
 \bibitem[KPV{\etalchar{*}}14]{kolesar2014illustrating}
 \textsc{Kolesar I., Parulek J., Viola I., Bruckner S., Stavrum A.-K., Hauser
@@ -76,6 +100,12 @@
 \newblock In \emph{IEEE Pacific Visualization Symposium (PacificVis 2015)}
   (2015).
 
+\bibitem[LO08]{lu20083dna}
+\textsc{Lu X.-J., Olson W.~K.}:
+\newblock 3dna: a versatile, integrated software system for the analysis,
+  rebuilding and visualization of three-dimensional nucleic-acid structures.
+\newblock \emph{Nature protocols 3}, 7 (2008), 1213--1227.
+
 \bibitem[LTDS{\etalchar{*}}13]{lv2013game}
 \textsc{Lv Z., Tek A., Da~Silva F., Empereur-Mot C., Chavent M., Baaden M.}:
 \newblock Game on, science-how video game technology may help biologists tackle
@@ -88,10 +118,25 @@
 \newblock \emph{Visualization and Computer Graphics, IEEE Transactions on 13},
   6 (2007), 1616--1623.
 
-\bibitem[{Sch}10]{PyMOL}
-\textsc{{Schr\"odinger, LLC}}:
-\newblock The {PyMOL} molecular graphics system, version~1.3r1.
-\newblock August 2010.
+\bibitem[MC98]{macke1998modeling}
+\textsc{Macke T.~J., Case D.~A.}:
+\newblock Modeling unusual nucleic acid structures.
+
+\bibitem[PJR{\etalchar{*}}14]{parulek2014continuous}
+\textsc{Parulek J., J{\"o}nsson D., Ropinski T., Bruckner S., Ynnerman A.,
+  Viola I.}:
+\newblock Continuous levels-of-detail and visual abstraction for seamless
+  molecular visualization.
+\newblock In \emph{Computer Graphics Forum} (2014), vol.~33, Wiley Online
+  Library, pp.~276--287.
+
+\bibitem[SLJ{\etalchar{*}}98]{sussman1998protein}
+\textsc{Sussman J.~L., Lin D., Jiang J., Manning N.~O., Prilusky J., Ritter O.,
+  Abola E.}:
+\newblock Protein data bank (pdb): database of three-dimensional structural
+  information of biological macromolecules.
+\newblock \emph{Acta Crystallographica Section D: Biological Crystallography
+  54}, 6 (1998), 1078--1084.
 
 \bibitem[SZA{\etalchar{*}}14]{shepherd2014exploring}
 \textsc{Shepherd J.~J., Zhou L., Arndt W., Zhang Y., Zheng W.~J., Tang J.}:

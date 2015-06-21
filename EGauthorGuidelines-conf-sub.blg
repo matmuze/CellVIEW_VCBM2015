@@ -3,9 +3,12 @@ The style file: eg-alpha-doi.bst
 Database file #1: egbibsample.bib
 Warning--can't use both volume and number fields in decoret2005n
 Warning--can't use both volume and number fields in decaudin2009volumetric
+Warning--empty journal in eichelbaum2013pointao
 Warning--can't use both volume and number fields in falk2013atomistic
+Warning--can't use both volume and number fields in guennebaud2004deferred
 Warning--can't use both volume and number fields in grottel2010coherent
 Warning--can't use both volume and number fields in lindow2012interactive
 Warning--can't use both volume and number fields in le2014illustrative
-Warning--empty note in PyMOL
-(There were 7 warnings)
+Warning--empty journal in macke1998modeling
+Warning--can't use both volume and number fields in parulek2014continuous
+(There were 10 warnings)
