@@ -31,16 +31,18 @@ Our rendering tool is directly integrated in the Unity3D game engine and is able
 }
 
 \maketitle
-
-\begin{abstract}
-In this article we introduce CellVIEW, a tool which is designed to help biologists with the visualization of large molecular datasets.
-Our method improves state-of-the-art techniques by introducing an efficient and highly scalable occlusion culling scheme.
-We take an illustrative approach for the rendering these molecular landscapes inspired by the work of scientific illustrators.
-We design a level-of-detail which is two-fold, to accelerate the rendering and to improve shape perception.
-The datasets that we are trying to visualize also contains large acid nucleic strands which are important to visualize.
-However the data is represented as control points only, we extend our rendering method to also support the dynamic generation of DNA strands on the GPU, for illustration purposes.
-It is worth mentioning that our tool is directly implemented inside a game engine.
-Our goal is to rely on third party game engines to reduce to load of software development from visualization researcher and to bring bleeding-edge graphics techniques more easily to the end-users.
+    \begin{abstract}
+In this article we introduce CellVIEW, a tool which is designed to help biologists with the visualization of large 3D models of cell-scale structures at the molecular level.
+By leveraging latest computer graphics tehcnics within the easy to use pipeline of the game engine Unity3d
+    domain experts can vizualise in real-time these highly complex biological models at the atomic level.
+In order to achieve interactivity, our method (i) improves state-of-the-art techniques by introducing an efficient and highly scalable occlusion culling scheme;
+(ii) uses an illustrative approach for the rendering of these molecular landscapes inspired by the work of scientific illustrators; and (iii)
+rely on a two-flod level-of-detail to accelerate the rendering and to improve shape perception.
+Cell-scale structure implies the visualization of large acid nucleic strands which are important to interactively inspect.
+    However the computer generated data is represented as control points only, we extend our rendering method to also support the dynamic generation of DNA strands on the GPU, for illustration purposes.
+CellView have been successfully used for displaying a scene containing the entire HIV virus surrounded by Blood plasma, 
+these scene has been duplicated 72 times leading a total number 30 billion atoms at interactive rate.
+Our goal is to rely on third party game engines to reduce the load of software development from visualization researcher and to bring bleeding-edge graphics techniques more easily to the end-users.
 
 \begin{classification} % according to http://www.acm.org/class/1998/
 \CCScat{Computer Graphics}{I.3.3}{Picture/Image Generation}{Line and curve generation}
