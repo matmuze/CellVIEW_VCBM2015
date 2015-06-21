@@ -237,11 +237,9 @@ Additionally, to limit the bandwidth due to the large number of texture write we
 The colors are fetched afterwards in postprocessing by reading the molecules properties from the id.
 We have seen very little overhead when drawing sphere impostors with id + convervative depth compared to flat depth impostor with no colors.
 
-
 %When rendering the early depth pass Grottel et al. were also disabling other type of output such as id and color to speed up the rendering.
 %In our case since we wish to reuse this pass later we must also output the fragment information as normally.
 %To limit the bandwidth due to the large number of texture write we only output the id of the molecules.
-
 
 %-------------------------------------------------------------------------
 \section{Twofold Level-of-Detail}
@@ -287,8 +285,29 @@ Each LOD level has a proper range in terms of camera depth which is common to ev
 We define min and max radius for each range and we smoothly interpolate between these values.
 Results of our twofold LOD can be seen in the supplementary video material.
 
-%Show comparison between No LOD and LOD
-
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=\textwidth]{gull}
+\caption{A gull}
+\label{fig:gull}
+\end{subfigure}
+~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+%(or a blank line to force the subfigure onto a new line)
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=\textwidth]{tiger}
+\caption{A tiger}
+\label{fig:tiger}
+\end{subfigure}
+~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+%(or a blank line to force the subfigure onto a new line)
+\begin{subfigure}[b]{0.3\textwidth}
+\includegraphics[width=\textwidth]{mouse}
+\caption{A mouse}
+\label{fig:mouse}
+\end{subfigure}
+\caption{Pictures of animals}\label{fig:animals}
+\end{figure}
 %-------------------------------------------------------------------------
 \section{Dynamic DNA Generation}
 
