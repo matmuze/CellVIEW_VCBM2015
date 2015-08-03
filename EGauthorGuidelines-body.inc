@@ -58,20 +58,18 @@ Our goal is to rely on third party game engines to reduce the load of software d
 
 Computational biology already offers the means to generate large and static models of cell biology, such as viruses or entire cells on the atomic level \cite{johnson2015hiv}\cite{johnson2015cellpack}.
 However, biologists struggle with viewing these large scale datasets, because the tools they are usually accustomed to cannot achieve interactive frame-rates for such heavy data loads.
-Foreseeing the future increase of the size of their datasets, they would need the ability to quickly render billions of atoms, while the current state-of-the-art tools used by fields expert are only able to interactively render up to hundreds of thousands of atoms on commodity hardware (VMD,Chimera,PMV, Pymol, unityMol, QuteMol).
-%\cite{grottel2015megamol}.
-The interactive visualization of such interesting datasets has even greater potential than strict science-driven data exploration. 
+Foreseeing the future increase of the size of their datasets, they would need the ability to quickly render billions of atoms, while the current state-of-the-art tools used by fields expert are only able to interactively render up to hundreds of thousands of atoms on commodity hardware (VMD,Chimera,PMV, Pymol, unityMol, QuteMol). Over advanced methodologies have show to be able to display up to 20 billions atoms but at less than 5fps \cite{grottel2015megamol}\cite{falk2013atomistic}\cite{lindow2012interactive}. More recentyl Guo et al. display up to 10billions atoms with their view-dependant approach\cite{guo2015}.
+ 
+The interactive visualization of such interesting datasets, while very challanging, has even greater potential than strict science-driven data exploration. 
 For instance, interactively showcasing the machinery of life to a lay audience could improve the understanding of basic biology, and thus serve an educational purpose.
 
 CellVIEW is a new tool that provides fast rendering of very large biomolecular scenes and is inspired by state-of-the-art techniques.
-By introducing new means to efficiently reduce the amount of processed geometries, we obtain a considerable speed-up compared to related works, jumping from 10 fps up to 60 fps for similar sized datasets.
-%DETAILS MORE HOW THIS IS ACHIEVE
-As a consequence to such optimisations, the visualization results in an overwhelming number of displayed molecules which may exhibit strong visual clutter due to the complexity of their shapes.
-Scientific illustrator David Goodsell has specialized in depictions of complex biomolecular sceneries\cite{goodcellpaint}. 
-The goal of these paintings is to visually communicate machineries of life, and therefore they should provide a maximum degree of understanding and clarity. 
-In most of his painting we observe a high degree of abstraction in the shapes of molecules (see Figure \ref{fig:David-S}).
+By introducing new means to efficiently reduce the amount of processed geometries, we obtain a considerable speed-up compared to related works, jumping from 10 fps up to 60 fps for similar sized datasets. CellVIEW improve previous approaches by using (i) an optimized occluding pass using N-depth, (ii) the sphere imposter quad augmented by the tesselation shader, (iii) a batch system for large non repeating such as lipids membrane bilayer, and (iv) a fully procedural DNA visualisation from given set of control point.
+  
+As a consequence to such optimisations, the visualization results in an overwhelming number of displayed molecules which may exhibit strong visual clutter due to the complexity of their shapes. However, observing the work of David Goodsell\cite{goodcellpaint}, pionneer in the representation of cellular environement at the molecular level, gave some hint on how to overcome such difficulties.  
+The goal of David Goodsell's paintings is to visually communicate machineries of life, and therefore they should provide a maximum degree of understanding and clarity. In most of his painting we observe a high degree of abstraction in the shapes of molecules (see Figure \ref{fig:David-S}).
 There is an obvious logical reasoning behind this decision which goes beyond simple aesthetics and which is to reduce the level of visual clutter in the scene in order to let the viewer appreciate what is truely shown.
-Inspired from the work of illustrators we designed a level-of-detail scheme which is twofold: to speed up rendering times and to clarify the scene with simpler shapes, thus procedurally imitating the mindset of scientific illustrators.
+Inspired from the work of illustrators, such as David Goodsell, we designed a level-of-detail scheme which is twofold: to speed up rendering times by reducing the number of spheres to be displayed and to clarify the scene with simpler shapes, thus procedurally imitating the mindset of scientific illustrators.
 
 Related works have already presented bleeding-edge techniques that can render large datasets with up to billions of atoms at interactive framerates on commodity graphics hardware \cite{lindow2012interactive}\cite{falk2013atomistic}\cite{le2014illustrative}\cite{grottel2015megamol}.
 However, to our knowledge, the tools which implemented these techniques were either not publicly available, or are difficult to acces for a regular end-user.
@@ -81,14 +79,13 @@ Unfortunately, this part is often omitted because of a busy research schedule an
 Consequently, if this task remains unachieved, end-users are unlikely to use state-of-the-art techniques in their work.
   
 CellVIEW provides a direct connection between state-of-the-art techniques and end users.
-We implement our tool using a free-to-use game engine, and it is therefore publicly available to anyone.
+We implement our tool using a free-to-use game engine, unity3D, and it is therefore publicly available to anyone.
 Because we utilize a game engine as development platform, we are able to release and deploy our tool faster, since our project only consist of a few scripts and shaders.
 We are then released from the burden of maintaining a complex software solution and from tedious deployment constraints.
 Additionally, since more people in the community are getting familiar with these engines, we ensure a maximum level of reproducibility among other researcher too, thus breaking the barriers caused by heterogeneous toolset usage across research departments.
 
-We showcase our tool with real large-scale scientific data such as a model of the mature HIV virus\cite{johnson2015hiv} and of the Mycoplasma bacteria which have been provided to us by domain experts.
-Their dataset also contain DNA strands, in the form of control points.
-We also extend our method to generate large strands of nucleic acids on-the-fly, thus reducing the modelling effort as well as GPU transfer times and memory space.
+We showcase our tool with large-scale scientific data of interest such as a model of the mature HIV virus\cite{johnson2015hiv} or the Mycoplasma bacteria which have been provided to us by domain experts. Theses dataset try to combine most recent structural knowledge of a particular system, and integrate it in a 3d model\cite{johnson2015cellpack}. Their dataset can also contain the genomic data as DNA strands, in the form of control points.
+Thus, we also extend our method to generate large strands of nucleic acids on-the-fly, thus reducing the modelling effort as well as GPU transfer times and memory space.
 
 %-------------------------------------------------------------------------
 \section{Related Work}
@@ -109,7 +106,7 @@ Therefore we are able to reuse the results of the early depth pass and avoid ren
 \label{fig:Picture7}
 \end{figure*}
 
-\textbf{Large-scale Molecular Visualization} Lindow et al. \cite{lindow2012interactive} have first introduced a method capable of quickly rendering large-scale atomic data consisting of several billions of atoms on commodity hardware.
+\textbf{Large-scale Molecular Visualization} Lindow et al. \cite{lindow2012interactive} have first introduced a method capable of quickly rendering large-scale atomic data consisting of several billions of atoms on commodity hardware.%framerate ?
 Rather than transferring the data from CPU to GPU every frame, they store the structure of each type of molecule only once and utilize instancing to repeat these structures in the scene.
 For each type of protein a 3D grid structure containing the atoms positions is created and then stored on the GPU memory.
 Upon rendering, the bounding boxes of the instances are drawn and individually raycasted, similarly to volumetric billboards \cite{decaudin2009volumetric}.
