@@ -351,13 +351,14 @@ Any twists or abrupt variation in frame orientation would cause visible artefact
 We perform the computation of the smooth and continuous frames primarily on the CPU.
 We first determine the normal direction for every control point of the path.
 Then we sequentially browse the control points and rotate the normal direction vector around the tangent vector in order to minimize the variation in orientation compared to the previous control point normal.
-The recalculated normals are then uploaded to the GPU along with the control points positions. %, and during the instantiation of the nucleic acids we obtain the normal vector of a nucleic acid by linear interpolation of the two segment normal vectors.
+The recalculated normals are then uploaded to the GPU along with the control points positions. During the instantiation of the nucleic acids, we can obtain the normal vector of a nucleic acid by linear interpolation of the two segment normal vectors.
 %The pseudo code for computing the minimized rotation normal vectors is given in appendix X.
 
 \subsection{Double Helix Instancing}
 When instancing individual pairs of nucleic acids in the tessellation shader, we first fetch the nucleic acid atoms, position them along the curve, orient them toward the normal direction and then rotate then around the tangent vector in order to generate the double helix.
 We always orient the first base of a segment according to the normal direction only, while the subsequent bases are all oriented towards the normal direction first and then rotated with an increasing angular offset of 34.3$^{\circ}$ around the tangent of the curve.
 The angular offset of a given base is defined as follows: $ \alpha = i \times 34.3$, where $i$ corresponds to the index of the base inside a segment.
+%again GraphiteLE use i*2*π/10.4.
 The last base of a segment must therefore always perform an offset rotation of $ (360 - 34.3)^{\circ}$ around the tangent vector.
 This way it connects smoothly to the first base of the next segment, which is oriented towards the normal vector only. 
 The result of the procedural generation of B-DNA is given in Figure \ref{fig:Picture10} as well as a visual explanation of the different steps.
@@ -371,14 +372,61 @@ Therefore, we must resample the control points along the curve to ensure a unifo
 Although we resample the control points accordingly to the B-DNA build rules, the length of the interpolated curve segments will always be slightly greater because of the curvature.
 We did not find this to be visually disturbing, probably because consecutive segments in our dataset did not showcase critically acute angles, so the overall curvature of the path remained rather low. 
 
+
+%-------------------------------------------------------------------------
+\section{Perks and Limitations of a Game Engine}
+Although game engines may not yet be the perfect all-in-one solution, they are good contenders to generic visualization frameworks. Above all, they offer ease of access to GPU features for fast computation, while remaining user friendly. CellVIEW is implemented in Unity3D, one of the most popular game creation framework. The engine uses C# as a scripting language and also supports a large array of platforms from desktop PCs to mobile devices. It is worth mentioning that the Unity3D engine is free of charge for the personal edition and thus is accessible to anyone. In this section we briefly review the perks and limitations of the engine when used as a development platform for scientific visualization.
+
+\subsection{What We Liked}
+\textbf{Scripting} The language which is used for coding with Unity3D is C#, while the engine is internally coded in C++. The simplicity of C# makes it a great language for quick prototyping over C++. Also, C# is more accessible to enthusiast programmers than C++, which makes our tool more accessible. Deployment is also easier since our project only consists of a few scripts while the heavy software part is actually
+inside the engine itself.
+
+\textbf{Editor} The game engine features a WYSIWYG editor, which is a great tool for artistic setup because it offers a real-time preview of the application. Additionally the editor features a large array of features which we may use out-the-box in our visualization such as high quality image effects for instance (SSAO, Depth-of-field, etc.). The editor also features UI extension capabilities, which we use
+to design the custom UI of CellVIEW.
+
+\textbf{Mesh-based Rendering} While our datasets are made out of particles, cell biology offers different types of data acquisitions, which may result in surface representations (e.g. Cryo-electron microscopy, Tomography). Therefore, we designed our rendering
+pipeline to coexists with the legacy mesh pipeline of
+the engine. Hence, we may use meshes that are either artist designed
+or obtained via data acquisition and render them together
+with our own data in the same view.
+
+\textbf{High-End GPU Capabilities} With Unity3D most of the low-level graphics API is exposed to the scripting world. Therefore, we encountered no difficulty to implement our custom pipeline which relies on advanced graphics features such as tesselation or compute shaders.
+
+\textbf{Maintenance} Unity3D is a very popular framework which generate large revenues in the game industry. Therefore, teams of professional developers are constantly working on improving the tool and supporting bleeding edge features.
+
+\textbf{Community} Unity3D is a universal tool that is widely used by many independent developers and professional multi-disciplinary teams. Therefore, the community is very large, and in addition to a very dense online documentation it is very easy to seek help online when facing problems with the engine.
+
+\textbf{Deployment} Although the editor is already a very good tool to work with, we may still want to export the program in a standalone application for deployment. From our experience, the building process and deployment is always a very cumbersome task. With Unity3D, the
+process of compiling a program to an actual executable file is only a matter of a few clicks.
+
+\subsection{What We Did Not Like}
+\textbf{CPU Performance} CPU performance might be strongly affected
+with the use of a C# scripting engine compared to native
+C++. While modern C#/.NET framework makes considerable
+steps towards multi-platform and close to native performance,
+Unity3D still features a scripting engine which is
+largely out of date. This is why we would not recommend it
+for heavy CPU computation, although alternative exists such
+as the use of ad-hoc native libraries for instance.
+
+\textbf{GPU Performance and Portability} While Unity3D has made crossplatform compilation one its major advantages, to this day,
+high-end graphics capabilities are only available with DirectX11. Thus, we may only deploy CellVIEW on machines that supports DirectX11 which excludes tablets, Linux, and OSX machines. However, Unity3D recently announced beta version that extend high-end graphics capabilities to support modern OpenGL, and will even provide support for compute and tessellation to mobile devices (e.g. OpenGL ES 3.0 on Android).
+
+\textbf{Source Code Availability} Other game engine such as Unreal Engine have recently released their source code to the public, in order to encourage third party and community-based extensions of the engine. In the case of Unity3D the source code of the engine is
+not publicly available, which means that if a critical feature
+is missing in the core of the engine, there will be no other option
+than requesting it rather than simply coding the feature
+ourselves.
+
+
 %-------------------------------------------------------------------------
 \section{Results}
 
 We have tested our techniques with different datasets which result from the same modeling software.
 The data was obtained with CellPACK \cite{johnson2015cellpack}, a modeling tool for procedural generation of large biomolecular structures.
  CellPACK summarizes and incorporates the most recent knowledge obtained from structural biology and system biology to generate comprehensive mesoscale models.
-For instance, based on experimentally obtained data (e.g. data such as proteins structure, concentration and spatial distribution), they managed to generate a whole model of the HIV virus via a packing method based on collisions constraints\cite{johnson2015hiv}. 
-They also compare their results with fluorescence microscopy images of real organisms to validate their results.
+For instance, based on experimentally obtained data (e.g. data such as proteins structure, concentration and spatial distribution), they managed to generate a whole model of the HIV virus via a packing method based on collisions constraints\cite{johnson2015hiv}. Although
+CellPACK is developed and used mostly by our domain experts, it is publicly available and offers to anyone the means for experimenting and creating their own models.
 In addition to CellPACK, we have used the program LipidsWrapper\cite{durrant2014lipidwrapper} to generate complete and accurate lipids membrane bilayer for each dataset generated by CellPACK.
 
 Our program reads the files that are generated by the tool and is able to reconstruct the scene in a multiscale approach.
@@ -386,34 +434,27 @@ The generated files comprise of a list of elements, namely the name, position, r
 The structural data is directly fetched online from the Protein Database.
 In case an entry is not present or refer to a custom PDB file, we load the protein information from a dedicated repository provided by the domain experts.
 The generated files also include control points for the linear or repetitive type of structures such as DNA, RNA, unfold peptide, lypoglycane, etc...
+When a lipid membrane has been computed and is available, in order to improve the parsing time, we converted it in a simple binary format (atom id, x,y,z res id) and populate buffer batch to be send to the GPU.
 
 \subsection{Use cases}
+\textbf{HIV Virus + Blood Plasma} The first dataset we showcase is a combination of two datasets :the HIV virus\cite{johnson2015hiv} surrounded by blood plasma \cite{bloodplasmarecipe}. The HIV is a retrovirus and thus only contains RNA, which features much more complex modeling rules than DNA, which forbids dynamic procedural generation. For this specific case the atomic structure of RNA would have to be modelled ad-hoc with a third party tool before being loaded in CellVIEW.
+Without the genomic information, the dataset comprises a total of 70 millions atoms consisting in 40 different types of molecules and a lipids membrane. The rendering test was performed on an Intel Core i7-3930 CPU 3.20 GHz machine coupled with a GeForce GTX Titan X graphics card with 12GB of video RAM. For the purpose of rendering benchmarks, we periodically repeat this dataset to reach an overall number of 15 billion atoms.
 
-The first dataset we showcase is a model of the mature HIV virus\cite{johnson2015hiv} surrounded by blood plasma \cite{bloodplasmarecipe}.
-The dataset comprises a total of 70 millions atoms consisting in 40 different types of molecules and a lipids membrane. 
-For the purpose of rendering benchmarks, we duplicate this dataset 75 times to reach a total number 30 billion atoms, which is similar in size of dataset showcased by Le Muzic et al.\cite{le2014illustrative}.
-The rendering test was performed on an Intel Core i7-3930 CPU 3.20 GHz machine coupled with a GeForce GTX Titan X graphics card with 12GB of video RAM.
 %We additionally provide a descriptive table (see Table X) for the average duration of the rendering steps which we describe in Figure \ref{fig:Picture7}.
-Because of the culling mechanisms, the load of visible molecules and thus the frame-rate varies according to the viewpoint.
-On average we did not see the framerate drop below 30 fps when using an accurate type of occlusion culling, and this was increased up to 60 fps when using a fast and lower quality type of culling. 
-%is this fast and lower quality type of culling discribe somewhere ?
-When zooming far out in order to see the dataset as a whole, the view starts to exhibit graining aliasing artifacts due to the very small size of individual molecules.
-While image quality could be improved with anti-alisaing techniques, the issue would still persist for larger zooming scale.
-What is truly needed here is a new type of abstraction for this data that would decrease visual clutter.
-%we can achieve it with 1molecule=1or2Sphere plus some other trick
 
-The HIV is a retrovirus and thus only contains RNA, which features much more complex modeling rules than DNA, which forbids dynamic procedural generation.
-For this specific case the atomic structure of RNA would have to be modelled ad-hoc with a third party tool before being loaded in CellVIEW. 
+It is rather hard to precisely evaluate the performance of a system which is based on level-of-detail as the parameters are arbitrarily chosen to balance image quality and performance. In our tests we were able to render the entire dataset above 60 fps from every viewing angle, from very far zoomed-out to very near close-ups. It is worth mentioning that it would always be possible to use a more aggressive
+level-of-detail to improve render speeds, in our tests we paid a special attention not to compromise image quality when setting up LOD parameters. Above 15 billion atoms we can hardly guaranty a smooth framerate above 60 fps from any viewing angle, however it would still be possible to render even larger structures at decent interactive framerates. However we start to question the utility of this approach to display datasets that would be one or several orders of magnitude
+higher. Indeed, when viewing large datasets as a whole, the view starts to exhibit graining aliasing artefacts due to the very small size of individual molecules. While image quality could be improved with anti-aliasing techniques, the issue would still persist for larger zooming scale. What would be truly needed at this scale is a new type of representation for this data that would reduce the amount of displayed geometries and also provide a clearer view of the scene.
 
-To fully demonstrate the use of our dynamic building rules for DNA, we use the data from Mycoplasma mycoide, one of the smallest bacteria with a genome of 1,211,703 baise pairs.
+\textbf{Mycoplsama} To fully demonstrate the use of our dynamic building rules for DNA, we use the data from Mycoplasma mycoide, one of the smallest bacteria with a genome of 1,211,703 baise pairs.
 Mycoplsama has been widely studied by biologists, and was the first organism to be fully synthetized\cite{mycosync}.
 For this dataset we are only showcasing a preliminar model build with CellPACK and containing only a quarter of the total genome. 
-This dataset comprise a set of 9617 control points defining the overall path of the DNA and the PDB reference for the nucleic acids base pair to be instanced along the path for an overall number of 11,619,195 atoms (Figure 8).
+This dataset comprise a set of 9617 control points defining the overall path of the DNA and the PDB reference for the nucleic acids base pair to be instanced along the path for an overall number of 11,619,195 atoms and the results can be seen in Figure 7.We were able to render and procedurally generate the entire strands at 70 fps without any LOD schemes. With this test we simply wanted to show the computation times to proof the efficiency of our technique. Naturally, when using LOD and culling schemes like with protein data, the performance would considerably increase and would not impact the rest of the computation. The results of the two datasets are shown in Figure 7, and a preliminary render of the Mycoplasma is show in Figure 8.
 
 \subsection{Discussion}
 
+Domain experts who have experimented with cellVIEW have responded favorably and with great enthusiasm. Prior to cellVIEW, visualizing this type of data was cumbersome for the experts and as the scale increased, it was often not possible to view large models with all structures turned on with a standard computer. cellVIEW now provides state-of-the-art techniques to accomplish this task. Some experts were dismayed that cellVIEW could not yet be implemented in their lab’s preferred or homemade visualization toolsets (i.e., not simply a python or C++ library they could access), but most had some experience working with the Unity 3D framework, so the transition to this standalone tool was sufficient. cellPACK users have frequently requested the ability render the fluorescent microscopy simulator representation of the scene. This simulator runs as a standalone Python script (black box that returns static images after processing), but cellVIEW can now generate the same representation in realtime, enabling the researcher to rotate the model to understand the potential relationships of the fluorescent markers modeled in 3D to the 2D images produced by super-resolution microscopes. This type of representation is very useful for comparing and validating modeled with real microscopy images. For large biological structures, such as Mycoplasma mycoides, the cellPACK viewers are currently unable to visualize the complete models produced by the packing algorithm. Because cellVIEW can handle Mycoplasma and larger models in atomic detail and with ease, it is evident that cellVIEW will become a critical tool for cellPACK users who wish to explore multi-scale modeling extremes such whole bacterial cells and ultimately whole mammalian cells.
 
-Domain experts who have experimented with cellVIEW have responded favorably and with great enthusiasm. Prior to cellVIEW, visualizing this type of data was cumbersome for the experts and as the scale increased, it was often not possible to view large models with all structures turned on with a standard computer. cellVIEW now provides state-of-the-art techniques to accomplish this task. Some experts were dismayed that cellVIEW could not yet be implemented in their lab’s preferred or homemade visualization toolsets (i.e., not simply a python or C++ library they could access), but most had some experience working with the Unity 3D framework, so the transition to this standalone tool was sufficient. cellPACK users have frequently requested the ability render the fluorescent microscopy simulator representation of the scene. This simulator runs as a standalone Python script (black box that returns static images after processing), but cellVIEW can now generate the same representation in realtime, enabling the researcher to rotate the model to understand the potential relationships of the fluorescent markers modeled in 3D to the 2D images produced by super-resolution microscopes. This type of representation is very useful for comparing and validating modeled with real microscopy images. For large biological structures, such as Mycoplasma mycoides, the cellPACK viewers are currently unable to visualize the complete models produced by the packing algorithm. Because cellVIEW can handle Mycoplasma and larger models in atomic detail and with ease, it is evident that cellVIEW will become a critical tool for cellPACK users who wish to explore multi-scale modeling extremes such whole bacterial cells and ultimately whole mammalian cells
 
 %-------------------------------------------------------------------------
 \section{Conclusions and Future Work}
@@ -421,7 +462,7 @@ Domain experts who have experimented with cellVIEW have responded favorably and 
 We have introduced CellVIEW, a tool for real-time multiscale visualization of large molecular landscapes.
 Our tool is able to load files generated by CellPACK a powerful modeling tool for designing entire organisms on the atomic level.
 CellVIEW was engineered to work seamlessly inside the Unity3D game engine, which allow us to prototype and deploy faster without compromising GPU performance.
-The method which we presented also features considerable improvements over previous works.
+The method which we presented also features notable improvements over previous works.
 We provide the mean for efficient occlusion culling, which is crucial when dealing with such large scale datasets.
 We also designed a level-of-detail which allows both acceleration of rendering times and provides a clear and accurate depiction of the scene.
 Finally, we demonstrated the use of dynamic tessellation to generate biolmolecular structures on-the-fly based on scientific modeling rules.
