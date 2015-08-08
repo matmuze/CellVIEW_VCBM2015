@@ -158,7 +158,7 @@ Their visualization is multi-scale and is able to render a large amount of data 
 Various works on interactive illustration of biological processes have also reported using game engines to visualize polymerization \cite{kolesar2014illustrating} and membrane crossings \cite{pacificvis15illustrative}.It is also worth mentioning the Molecular Flipbook\cite{mfbook} a framework developed on top of the blender game engine. The Molecular Flipbook aim is to help scientific and illustrator to easily design, model, animate and share molecular machinery. 
 Similarly to our work, Baaden \textit{et al.}\cite{lv2013game} developed a molecular viewer which offers artistic and illustrative rendering methods based on the Unity3D game engine.
 Their primary intention was to democratize biomolecular visualization thanks to the use of a more intuitive and user friendly framework.
-All of theses tool has managed to prove that game engines are also useful in serious visualization projects. However, they show limitation for the visualization of larger scene at a cellular scale. For instance, unityMol focus on the rendering and the exploration of one molecule at a time. The Molecular Flipbook instead provide tools to animate and design more complex scene but it is limited to schematic representation (SES, cartoon) and will not be able to handle larger scene with atomic details. We developed CellVIEW to addresse the problem of vizualising multiscale scenes with atom level complexity. Moreover, one noticeable technical difference presents in CellVIEW is that our tool is fully integrated in the "What you see is what you get" (WYSIWYG) editor of the Unity3D engine.
+All of theses tool has managed to prove that game engines are also useful in serious visualization projects. However, they show limitation for the visualization of larger scene at a cellular scale. For instance, unityMol focus on the rendering and the exploration of one molecule at a time. The Molecular Flipbook instead provide tools to animate and design more complex scene but it is limited to schematic representation (SES, cartoon) and will not be able to handle larger scene with atomic details. We developed CellVIEW to address the problem of visualizing multi-scale scenes with atom level complexity. Moreover, one noticeable technical difference presents in CellVIEW is that our tool is fully integrated in the "What you see is what you get" (WYSIWYG) editor of the Unity3D engine.
 Thus our tool coexists with the engine toolset which provides a rich set of functionalities which we can directly use to enhance the quality of our visualization (e.g. Depth of fields, Image effect, Ambiant occlusion, etc...).
 
 %we can also do a table comparison here. Theses software are available.
@@ -197,30 +197,44 @@ Each buffer entry simply contains the id of the corresponding molecule, which se
 
 \subsection{Temporal coherency}
 
-The key to our culling method is the use of temporal coherency to determine hidden molecules.
-The rendering process generates an item buffer texture which contains the id of the visible molecules instead of the color.
-We process this texture at the end of each frame in order to determine the visible molecules.
-These molecules are then drawn at the beginning of the next frame by issuing one render command per visible molecule.
+The key to our culling method is the use of temporal coherency
+to determine hidden molecules. The rendering generates
+a texture, dubbed item buffer, whose pixels contain the
+id of the visible molecules instead of the color. We process
+this texture at the end of each frame in order to determine
+the visible molecules. These molecules are then drawn at the
+beginning of the next frame by issuing one render command
+per visible molecule.
+%what does dubbed item buffer mean?
 
 The render results are thus incomplete and only contains molecules that were previously visible. To query the visibility of the remaining molecules we generate a HZB buffer from the incomplete depth buffer which we previously rendered. We subsequently determine the occlusion of the remaining molecules and generate render commands for the visible ones. The remaining molecules are finally rendered, thus completing the depth and id buffer, which are then used
 to determine the visible elements for the next frame.
 
-The resulting depth buffer is then used to query the visibility of the remaining molecules. For comparison, Grottel \textit{at al.} were using HOQ for this task. 
-The HOQ approach will cause a GPU driver overhead in the case of millions of proteins (billions of atoms), which would very likely cause a severe bottleneck in our pipeline.
+%The resulting depth buffer is then used to query the visibility of the remaining molecules. For comparison, Grottel \textit{at al.} were using HOQ for this task. 
+%The HOQ approach will cause a GPU driver overhead in the case of millions of proteins (billions of atoms), which would very likely cause a severe bottleneck in our pipeline.
 %any way to justisy this statement ?
-We implemented an occlusion culling technique named N-Buffers \cite{decoret2005n} instead, which is a variant of the well known hierarchical z-buffer (HZB) culling method \cite{greene1993hierarchical}. 
-A great advantage of the N-Buffers technique over traditional HZB is that we can use it with arbitrarily sized depth buffer.
-Therefore, we can reuse the results of the first render pass which we got by drawing visible elements at frame t-1.
+%We implemented an occlusion culling technique named N-Buffers \cite{decoret2005n} instead, which is a variant of the well known hierarchical z-buffer (HZB) culling method \cite{greene1993hierarchical}. 
+%A great advantage of the N-Buffers technique over traditional HZB is that we can use it with arbitrarily sized depth buffer.
+%Therefore, we can reuse the results of the first render pass which we got by drawing visible elements at frame t-1.
 
-The use of the incomplete detph buffer from Step 1 results in very accurate occlusion culling in any cases.
-But because the depth buffer is incomplete the visibility test performed via N-Buffers still lets a lot of hidden molecule go to the render.
-Alternatively we propose a second variant which uses the depth buffer form the previous frame instead to build the N-buffers.
-As a result much less hidden molecules are sent to the render, since the buffer in not incomplete, which increases performance.
-But it also compromises image quality in the case of abrupt changes of point of view because incoherency in consecutive frames would result in unpleasant artefacts. 
-%this could go in the intro as well. About what new things are added by this paper
-%also by testing 1million molecules I saw a lot of flashing. Is this methods dependant on the camera near and far clipping plane ?
+The use of the incomplete depth buffer for occlusion
+culling often results in an overly large number of hidden
+molecules to pass the test, which can reduce performance.
+Alternatively we propose a variant of this method which
+uses the depth buffer from the previous frame to generate
+the HZB and to determine the remaining visible molecules.
+As a result much less hidden molecules are sent to the render,
+since the buffer is not incomplete, thus increasing performance
+greatly. However, abrupt changes of point of view
+would result in short but noticeable artifacts due to incoherency
+between consecutive frames. We suggest using the
+second variant when dealing with very large datasets.
 
-\subsection{Conservative Depth Output}
+%what is this second variant ?
+
+%also by testing 1 million molecules(1billion atoms) I saw a lot of flashing. Is this methods depends on the camera near and far clipping plane ?
+
+\subsection{Accelerating Texture Writes}
 
 \begin{figure}
 \centering
@@ -229,74 +243,62 @@ But it also compromises image quality in the case of abrupt changes of point of 
 \label{fig:Picture5}
 \end{figure}
 
-A limitation that was stated in the implementation of Grottel et al. was the lack of early depth rejection for depth impostors.
-%For this reason they precomputed an extra depth pass with flat impostors instead, which means that visible elements from frame t-1 must be rendered twice.
-%Unfortunately, given the high level of complexity in our scenes the computation of an extra depth pass would likely cause unwanted overhead.
-%Therefore the early depth pass which we initially render for temporal coherency culling also performs an actual render pass to which is then reused afterwards in the second pass when drawing the remaining of the visible molecules.
-Thanks to advances in graphics hardware however, it is now possible to activate early depth rejection when a fragment is modifying the output depth value.
-Once activated, in order for conservative depth output to work, we must output a depth which is greater than the depth of the 2D billboard.
-This way the GPU is able to tell if a fragment will be visible beforehand by querying the visibility of the fragment internally. 
-A description of the depth conservative output sphere impostor is given in Figure \ref{fig:Picture5}.
-Additionally, to limit the bandwidth due to the large number of texture writes, we only output the id of the molecules upon rendering.
-The colors are fetched afterwards in postprocessing by reading the molecules properties from the id.
-We have seen very little overhead when drawing sphere impostors with id + conservative depth compared to flat depth impostor with no colors.
-%some number here ? like fps difference ?
+When drawing atoms of a single molecule many atoms are actually occluded by atoms of the same molecule and other surrounding atoms. These atoms will be drawn nevertheless, as a well known limitation of graphics hardware, so far, was the lack of early depth fragment rejection for depth impostors. However, thanks to advances in graphics hardware, it is now possible to activate early depth rejection when a fragment is modifying the output depth value. This feature is called conservative depth output. Once activated, in order for conservative depth output to work, we must output a depth value which is greater than the depth of the 2D billboard. This way the GPU is able to tell if a fragment will be occluded beforehand by querying the visibility internally. A description of the depth conservative output sphere impostor is given in Figure 3. Additionally, to limit the number of texture writes we only output the id of the molecules to the render texture upon rendering. The colors are fetched afterwards in post processing by reading the molecules properties from their id. We have witnessed a considerable improvement in performance when writing depth conservative output + id, compared to standard depth output + color + id (see table X).
+%we need actual number comparison for this statements.
 
-%When rendering the early depth pass Grottel et al. were also disabling other type of output such as id and color to speed up the rendering.
-%In our case since we wish to reuse this pass later we must also output the fragment information as normally.
-%To limit the bandwidth due to the large number of texture write we only output the id of the molecules.
 
 %-------------------------------------------------------------------------
 \section{Twofold Level-of-Detail}
 \label{sec:biomol}
 
 
-
 Proteins are key elements of biological organisms and thus it is important to visualize them in order to understand how those machineries work.
-They are also present in fairly large quantities, which is challenging to render interactively without proper level-of-detail schemes.
-Additionally, their complex shapes might cause a high degree of visual clutter, which may lead to unpleasant visual results.
+They are also present in fairly large quantities, which is challenging to render interactively without proper level-of-detail schemes (LOD).
+Additionally, their complex shapes might cause a high degree of visual clutter, which may render overly complex images.
 
 We propose a twofold level-of-detail scheme which provides rendering acceleration and offers a clearer depiction of the scene using smoothly abstracted shapes.
 Our technique also offers a seamless continuum between the different levels of abstractions.
-%To simplify molecular structures Le Muzic et al. \cite{le2014illustrative} were discarding atoms uniformly along the backbone of the protein while the radius of remaining atoms was increased in order to compensate the voids.
-%Because this approach does not guaranty the overall volume of the molecule to be preserved it may exhibits incoherent shapes with high degree of simplification.
-We employ clustering methods similarly to the technique of Parulek et al. \cite{parulek2014continuous} to simplify the shape of the molecules and reduce the amount of primitives to render.
+
+We employ clustering methods similarly to the technique of Parulek \textit{et al.} \cite{parulek2014continuous} to simplify the shape of the molecules and reduce the amount of primitives to render.
 Clustering offers a very good decimation ratio as well as accurate shape abstraction, because they tend to preserve low-frequency details.
 With higher shape accuracy we are also able to switch to simpler LOD proxies closer to the camera, thus gaining render speed without compromising image quality.
-The clusters spheres are computed on the CPU and then stored in large GPU buffers that may be accessed by the dynamic tessellation via address pointers, similarly to atom spheres.
-We empirically determined that four levels of detail where sufficient with our current dataset.
-%details more why 4levels. We actually need 5. The last should be 0/1/2 spheres per molecules depending on their radius and the current ratio pixel/angstrom
+%I believe we need some number here as well
+The clustering results in a set of spheres which are computed on the CPU and then stored in large GPU buffers similarly to atom spheres. We empirically determined that four levels of detail where sufficient with our current dataset.
+%details more why 4 levels. We actually need 5. The last should be 0/1/2 spheres per molecules depending on their radius and the current ratio pixel/angstrom
 With these settings we also paid special attention not to compromise image quality.
 All the proteins share the same level proprieties: the first level includes 100 percent of the atoms, the second level has a decimation ratio of around 15 percent, the third level 5 percent and the last level down to 0.5 percent.
 
-The first two levels were computed with a simple method based on spatial coherency of atoms along the protein chain, also known as coarse grain molecular simplification.%more details of our implementation
+The second and third levels were computed with a simple method based on spatial coherency of atoms along the protein chain, also known as coarse grain molecular simplification.
+%more details of our implementation
 This method has previously been used in biomolecular visualization to simplify the generation of molecular surfaces \cite{krone2009interactive}. 
 We use this approach because it is faster to compute than standard clustering method for similar results.
-For the last level we wanted to dramatically reduce the number of spheres, and therefore the previous approach would not perform well enough for this task, so we use k-means clustering instead.
-A major issue common to many clustering algorithms is the slow computing speed when dealing with several thousands of spheres.
-We use the results of the third clustering level as input for the k-means clustering instead of the complete set of atoms, thus decreasing dramatically computation times.
+For the last level we wanted to dramatically reduce the number of spheres, and therefore the previous approach would not perform well enough for this task. Instead, we implemented a simple version of the well known k-means clustering.
+A major issue common to many clustering algorithms is the slow computing speed when dealing with several thousands of points.
+In order to decrease dramatically the computation times, we chose to apply the k-means clustering on the results of the third clustering level instead of the complete set of atoms.
 The resulting levels are shown on Figure \ref{fig:Picture4}.
 
 When observing the large-scale biomolecular depictions of David Goodsell \ref{fig:David-S}, we noticed that molecules tend to increase in volume with distance.
+%is that true in david's painting. I will ask him if he actually have a number for that...
 This operation is probably done to compensate the relatively small size of proteins when viewed in their natural embedding.
 We subjectively found this artistic choice to be visually pleasant and relevant too.
-Therefore we also include a scaling factor to our illustrative level-of-detail.
-Each LOD level has a proper range in terms of camera depth which is common to every type of molecule, i.e., level 0 is defined between distance 0 and 50 Angstrom(A), level 2 between 50 and 100 A, level 3 between 100 and 150A.
+Therefore we also include a scaling factor to our illustrative LOD.
+Each LOD level has a proper range in terms of camera depth which is common to every type of molecule, i.e., level 0 is defined between distance 0 and 50 Angstrom(\r{A}), level 2 between 50 and 100 \r{A}, level 3 between 100 and 150\r{A}.
 We define min and max radius for each range, and we smoothly interpolate between these values.
 %give more detail on the range, and some kind of justification. again could use the ratio pixel/angstrom
-A side-by-side comparison between our illustrative level-of-detail compared to full atomic detail in provided in Figure \ref{fig:Picture9}.
+A side-by-side comparison between our illustrative LOD compared to full atomic detail is provided in Figure \ref{fig:Picture9}.
 
+%I would like to add a fifth level representing 1/2 spheres per molecules. And a second row with a larger molecule
 \begin{figure}
 \centering
 \includegraphics[width=0.8\linewidth]{Figures/Picture4}
-\caption{Our level-of-detail scheme allows to greatly reduce the number of sphere primitives. From left to right, the protein is shown with full-atomic detail, with only 15 percent of the overall sphere count, with 5 percent and with 0.5 percent. The LOD scheme reduce the number of spheres from 10182 to 50 while preserving the overall shape of the protein.}
+\caption{Our level-of-detail scheme allows to greatly reduce the number of sphere primitives. From left to right, the protein is shown with (i) full-atomic detail, (ii) only 15 percent of the overall sphere count, (iii) 5 percent and (iv) 0.5 percent. The LOD scheme reduce the number of spheres from 10182 to 50 while preserving the overall shape of the protein. The shape of individual spheres is more highlighted in this figure compared to our application for a clearer depiction of the LOD.}
 \label{fig:Picture4}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=0.8\linewidth]{Figures/Picture9}
-\caption{Side by side comparison of our illustrative level-of-detail compared with full atomic details.}
+\caption{Side-by-side comparison of our illustrative LOD compared with full atomic details. Our illustrative LOD provides smoother and elegant shapes, while also reducing the processing load.}
 \label{fig:Picture9}
 \end{figure}
 
@@ -306,29 +308,28 @@ A side-by-side comparison between our illustrative level-of-detail compared to f
 \begin{figure}
 \centering
 \includegraphics[width=1\linewidth]{Figures/Picture10}
-\caption{Visual explanation of how we dynamically generate B-DNA structures. On the first image we can see the position of the individual bases. The color gradient highlight the individual segments.
-On the second image we draw the smooth normals along the curve, the color desaturation shows the direction of the vector. The following image shows the rotation offset of the normal vector along the tangent. The final image shows the final result.}
+\caption{Procedural generation of B-DNA structures via GPU dynamic tessellation. In the first image we can see the position of the individual bases. The color gradient highlight the individual segments. In the second image we draw the smooth normals along the curve, the color desaturation shows the direction of the vector. The third image shows the rotation offset of the normal vector along the tangent, and the last image shows the final result.
+}
 \label{fig:Picture10}
 \end{figure}
 
-%Animating individual molecules is fairly straightforward because modifying the atomic structure may not be required.
+Animating individual molecules is fairly straightforward because modifying the atomic structure may not be required.
 In the case of DNA, the positions of the control points of the DNA path highly influence its structure, namely the positions and rotations of the individual nucleic acids.
 As a result, each modification of the control points of the DNA path would require a new computation of the strand.
 Current approaches are only performed on the CPU, \cite{hornus2013easy,lu20083dna,macke1998modeling} which means that the whole nucleic acids chain has to be transferred to the GPU upon re-computation.
 While this approach is viable for low to mid sized DNA strands, it is very likely to perform poorly for large and dynamic DNA paths featuring a large number of control points.
-%report test done in GraphiteLE or check the paper for performance benchmark
+%report test done in GraphiteLE or check the paper for performance benchmark. I was actually able to load the path we used in HIV. I will try to load the one we used for mycoplasma. However, they have a really strong LOD system that quickly switch to cartoon representation. so we will not be able to compare.
 
 We propose to use the dynamic tessellation to leverage the generation of nucleic acid strands.
-So far we only used tessellation to instantiate data priorly stored on the GPU memory.
-However, we can include building rules characteristic to DNA geometry to procedurally generate a double helix structure simply based on control points.
-Thus, the data transfers to the GPU would be dramatically reduced as well as GPU memory space.
+So far we only used tessellation to instantiate data priorly stored on the GPU memory. However it is possible to include building rules characteristic to the DNA well known geometry (see for instance \cite{dnageom}) to procedurally generate a double helix structure simply based on control points. Thus, the data transfers to the GPU is dramatically reduced as well as GPU memory space.
 
 Similarly to GraphiteLifeExplorer \cite{hornus2013easy}, our goal is more illustrative than strict biomolecular modeling.
-$put a reference on NA geometry
 Therefore we privilege rendering performance over accuracy, and we provide only a limited array of folding types.
-Although the study of DNA structures has revealed many different types of foldings, requiring complex modeling algorithms, the most commonly recognizable shape is the B-DNA and exhibits a regular structure which is simple to model: a spacing of 3.4 \r{A} and a rotation of 34.3$^{\circ}$ between each base.
-%are these the same rules used by GraphiteLE
-Based on these rules we are able to dynamically generate B-DNA strands on the GPU via dynamic tessellation.
+Although the study of DNA structures has revealed many different types of foldings, requiring complex modeling algorithms, the most commonly recognizable shape is the B-DNA and exhibits a regular structure which is simple to model: a spacing of 3.4\r{A} and a rotation of 34.3$^{\circ}$ between each base.
+%GraphiteLE use the same rules, although the angles is discribe as ~ i*2*π/10.4. Also GraphiteLe only do surface mesh for protein.
+Based on these rules we are able to procedurally generate B-DNA strands based on path control points via GPU dynamic
+tessellation. Similarly to GraphiteLifeExplorer, our approach doesn't currently support a specific sequence of nucleotides. However, adding an addition id fields in the buffer would be feasible.
+%should we do it ? 
 The workflow which we employ is described as follow:
 
 \begin{enumerate}
