@@ -25,24 +25,16 @@
 \teaser{
 \includegraphics[width=\linewidth]{Figures/teaser}
 \centering
-\caption{Real-time screen-shot from our application, the view represents an illustrative cross-section of the HIV virus surrounded by blood plasma. 
-Our rendering tool is directly integrated in the Unity3D game engine and is able to render datasets with up to 30 billions at more than 30 fps in HD.}
+\caption{Real-time screen-shot from our application, an illustrative cross-section of the HIV virus surrounded by blood plasma. Our rendering tool is directly integrated in the Unity3D game engine and is able to render datasets with up to 15 billion atoms smoothly at 60Hz and in high resolution. Because the dataset is rather complex we opted for an illustrative rendering style to improve shape perception and which was inspired by the work of scientific illustrators.}
 \label{fig:teaser}
 }
 
 \maketitle
     \begin{abstract}
-In this article we introduce CellVIEW, a tool which is designed to help biologists with the visualization of large 3D models of cell-scale structures at the molecular level.
-By leveraging latest computer graphics tehcnics within the easy to use pipeline of the game engine Unity3d, 
-    domain experts can vizualise in real-time these highly complex biological models at the atomic level.
-In order to achieve interactivity, our method (i) improves state-of-the-art molecular visualization techniques by introducing an efficient and highly scalable occlusion culling scheme;
+In this article we introduce CellVIEW, a new system to visualize in real-time large biomolecular datasets on the atomic level. Our tool is unique and has been specifically designed to match the ambitions of our domain experts to model and interactively visualize structures comprised of several billions atoms. The CellVIEW system integrates several acceleration techniques to allow for real-time graphics performance of 60 Hz display rate on datasets containing up to billions of atoms, which corresponds to sizes of small bacterial organisms. CellView have been successfully used for displaying a scene containing the entire HIV virus surrounded by Blood plasma representative molecules. This HIV scene has been duplicated 72 times leading to a total number of 30 billion atoms at interactive rate. In order to achieve interactivity, our method (i) improves state-of-the-art molecular visualization techniques by introducing an efficient and highly scalable occlusion culling scheme;
 (ii) uses an illustrative approach for the rendering of these molecular landscapes inspired by the work of scientific illustrators; and (iii)
-rely on a two-fold level-of-detail to accelerate the rendering and to improve shape perception.
-Cell-scale structure implies the visualization of large acid nucleic strands which are important to interactively inspect.
-    However the computer generated data is represented as control points only, we extend our rendering method to also support the dynamic generation of DNA strands on the GPU, for illustration purposes.
-CellView have been successfully used for displaying a scene containing the entire HIV virus surrounded by Blood plasma representative molecules. 
-This HIV scene has been duplicated 72 times leading to a total number of 30 billion atoms at interactive rate.
-Our goal is to rely on third party game engines to reduce the load of software development from visualization researcher and to bring bleeding-edge graphics techniques more easily to the end-users.
+rely on a two-fold level-of-detail to accelerate the rendering and to improve shape perception.  The main part of our datasets is made out of proteins, but it also comprises of nucleic acids strands which are stored as sets of control points. For that specific case, we extend our rendering method to also support the dynamic generation of DNA strands directly on the GPU. It is worth mentioning that our tool has been directly implemented inside a game engine. We chose to rely on third party game engines to reduce software development work-load and to bring bleeding-edge graphics techniques more easily to the end-users. To our knowledge CellVIEW is the only suitable framework for atomistic visualization of large bimolecular landscapes and is also accessible to a large audience due to the use of a free-to-use popular game engine.
+
 
 \begin{classification} % according to http://www.acm.org/class/1998/
 \CCScat{Computer Graphics}{I.3.3}{Picture/Image Generation}{Line and curve generation}
@@ -60,19 +52,24 @@ Computational biology already offers the means to generate large and static mode
 However, biologists struggle with viewing these large scale datasets, because the tools they are usually accustomed to cannot achieve interactive frame-rates for such heavy data loads.
 Foreseeing the future increase of the size of their datasets, they would need the ability to quickly render billions of atoms, while the current state-of-the-art tools used by fields expert are only able to interactively render up to hundreds of thousands of atoms on commodity hardware (VMD,Chimera,PMV, Pymol, unityMol, QuteMol). Over advanced methodologies have show to be able to display up to 20 billions atoms but at less than 5fps \cite{grottel2015megamol}\cite{falk2013atomistic}\cite{lindow2012interactive}. More recentyl Guo et al. display up to 10billions atoms with their view-dependant approach\cite{guo2015}.
  
-The interactive visualization of such interesting datasets, while very challanging, has even greater potential than strict science-driven data exploration. 
+The interactive visualization of such interesting datasets, while very challenging, has even greater potential than strict science-driven data exploration. 
 For instance, interactively showcasing the machinery of life to a lay audience could improve the understanding of basic biology, and thus serve an educational purpose.
 
-CellVIEW is a new tool that provides fast rendering of very large biomolecular scenes and is inspired by state-of-the-art techniques.
-By introducing new means to efficiently reduce the amount of processed geometries, we obtain a considerable speed-up compared to related works, jumping from 10 fps up to 60 fps for similar sized datasets. CellVIEW improve previous approaches by using (i) an optimized occluding pass using N-depth, (ii) the sphere imposter quad augmented by the tesselation shader, (iii) a batch system for large non repeating such as lipids membrane bilayer, and (iv) a fully procedural DNA visualisation from given set of control point.
-  
-As a consequence to such optimisations, the visualization results in an overwhelming number of displayed molecules which may exhibit strong visual clutter due to the complexity of their shapes. However, observing the work of David Goodsell\cite{goodcellpaint}, pionneer in the representation of cellular environement at the molecular level, gave some hint on how to overcome such difficulties.  
-The goal of David Goodsell's paintings is to visually communicate machineries of life, and therefore they should provide a maximum degree of understanding and clarity. In most of his painting we observe a high degree of abstraction in the shapes of molecules (see Figure \ref{fig:David-S}).
-There is an obvious logical reasoning behind this decision which goes beyond simple aesthetics and which is to reduce the level of visual clutter in the scene in order to let the viewer appreciate what is truely shown.
+CellVIEW is a new tool that provides fast rendering of very large biological macromolecular scenes and is inspired by state-of-the-art techniques.
+By introducing new means to efficiently reduce the amount of processed geometries, we obtain a 6 times speed-up compared to related works, jumping from 10 fps up to 60 fps for similar sized datasets. CellVIEW improve previous approaches by using (i) an optimized occluding pass using N-depth, (ii) the sphere impostor quad augmented by the tessellation shader, (iii) a batch system for large non repeating data such as lipids membrane bilayer, and (iv) a fully procedural DNA visualization from a given set of control point. As a consequence to such optimizations, the visualization results in an overwhelming number of displayed molecules which may exhibit strong visual clutter due to the complexity of their shapes. However, observing the work of David Goodsell\cite{goodcellpaint}, pioneer in the representation of cellular environment at the molecular level, gave some hint on how to overcome such difficulties. The goal of David Goodsell's paintings is to visually communicate machineries of life, and therefore they should provide a maximum degree of understanding and clarity. In most of his painting we observe a high degree of abstraction in the shapes of molecules (see Figure \ref{fig:David-S}).
+There is an obvious logical reasoning behind this decision which goes beyond simple aesthetics and which is to reduce the level of visual clutter in the scene in order to let the viewer appreciate what is truly shown.
 Inspired from the work of illustrators, such as David Goodsell, we designed a level-of-detail scheme which is twofold: to speed up rendering times by reducing the number of spheres to be displayed and to clarify the scene with simpler shapes, thus procedurally imitating the mindset of scientific illustrators.
 
-Related works have already presented bleeding-edge techniques that can render large datasets with up to billions of atoms at interactive framerates on commodity graphics hardware \cite{lindow2012interactive}\cite{falk2013atomistic}\cite{le2014illustrative}\cite{grottel2015megamol}.
-However, to our knowledge, the tools which implemented these techniques were either not publicly available, or are difficult to acces for a regular end-user.
+Related works have already presented bleeding-edge techniques that can render large datasets with up to billions of atoms at interactive framerates on commodity graphics hardware:
+\begin{itemize}
+\item Lindow \textit{et al.} 10 billions atoms 3fps\cite{lindow2012interactive}
+\item Le Music \textit{et al.} 30 billions atoms 10fps\cite{le2014illustrative}
+\item Falk \textit{et al.} 25 billions atoms 3.6fps\cite{falk2013atomistic}
+\item Grottel \textit{et al.} 100 millions spheres 10fps\cite{grottel2015megamol}.
+\item Guo \textit{et al.} ??\cite{guo2015}.
+\ldots \end{itemize}
+
+However, to our knowledge, most of the tools which implemented these techniques were either not publicly available, or are difficult to access for a regular end-user.
 Indeed, a very cumbersome task for researchers is to release a usable version of the source code once the article has been published.
 Presented techniques are often just a proof-of-concept that would require additional software development to ensure a maximum degree of portability.
 Unfortunately, this part is often omitted because of a busy research schedule and is simply left in the hand of interested third party developers.
@@ -100,28 +97,27 @@ Thus, we also extend our method to generate large strands of nucleic acids on-th
 \begin{figure*}
 \centering
 \includegraphics[width=0.9\linewidth]{Figures/Picture7}
-\caption{The work-flow of our efficient culling method. The blue squares represent GPU buffers or textures and the grey squares represent the different steps of our method.
+\caption{The work-flow of our efficient culling method. The blue squares represents GPU buffers or textures and the grey squares represents the different steps of our method.
 The color buffer is the final buffer which will be displayed on the screen. We accelerate rendering process by using a conservative depth output and by only writing the id of the molecules during the render.
 Therefore we are able to reuse the results of the early depth pass and avoid rendering the same geometries twice.}
 \label{fig:Picture7}
 \end{figure*}
 
-\textbf{Large-scale Molecular Visualization} Lindow et al. \cite{lindow2012interactive} have first introduced a method capable of quickly rendering large-scale atomic data consisting of several billions of atoms on commodity hardware.%framerate ?
-Rather than transferring the data from CPU to GPU every frame, they store the structure of each type of molecule only once and utilize instancing to repeat these structures in the scene.
+\textbf{Large-scale Molecular Visualization} Lindow \textit{et al.} \cite{lindow2012interactive} have first introduced a method capable of quickly rendering large-scale atomic data consisting of several billions of atoms on commodity hardware. Rather than transferring the data from CPU to GPU every frame, they store the structure of each type of molecule only once and utilize instancing to repeat these structures in the scene.
 For each type of protein a 3D grid structure containing the atoms positions is created and then stored on the GPU memory.
 Upon rendering, the bounding boxes of the instances are drawn and individually raycasted, similarly to volumetric billboards \cite{decaudin2009volumetric}.
-Subsequently Falk et al. \cite{falk2013atomistic} presented a similar approach with improved depth culling and hierarchical ray casting for impostors that are located far away and do not require a full grid traversal.
+Subsequently Falk \textit{et al.} \cite{falk2013atomistic} presented a similar approach with improved depth culling and hierarchical ray casting for impostors that are located far away and do not require a full grid traversal.
 Although this implementation features depth culling, their method only operates on the fragment level, while they could have probably benefited from a culling on the instance level too. 
-With their new improvement they managed to obtain 3.6 fps in full HD resolution for 25 billions of atoms on a NVidia GTX 580, while Lindow et al. managed to get around 3 fps for 10 billions atoms in HD resolution on a NVIDIA GTX 285. 
-Le Muzic et al \cite{le2014illustrative}, introduced another technique for fast rendering of large particle-based datasets using the GPU rasterization pipeline instead.
+With their new improvement they managed to obtain 3.6 fps in full HD resolution for 25 billions of atoms on a NVidia GTX 580, while Lindow \textit{et al.} managed to get around 3 fps for 10 billions atoms in HD resolution on a NVIDIA GTX 285. 
+Le Muzic \textit{et al.} \cite{le2014illustrative}, introduced another technique for fast rendering of large particle-based datasets using the GPU rasterization pipeline instead.
 They were able to render up to 30 billions of atoms at 10 fps in full HD resolution on a NVidia GTX Titan.
-They utilize tessellation shaders to inject atoms on-the-fly in the GPU pipeline similarly to the technique of Lampe et al. \cite{lampe2007two}.
+They utilize tessellation shaders to inject atoms on-the-fly in the GPU pipeline similarly to the technique of Lampe \textit{et al.} \cite{lampe2007two}.
 In order to increase the rendering speed they dynamically reduce the number of injected atoms accordingly to the camera depth.
 To simplify the molecular structures they discard atoms uniformly along the protein chain and increase the radius of remaining atoms to compensate the volume loss.
 This level-of-detail scheme offers decent results for low degrees of simplification but it does not truly guarantee to preserve the overall shape of molecules for highly simplified structures.
 
 \textbf{Occlusion Culling} A key aspect when rendering large and complex scenes is efficient occlusion culling.
-Grottel et al. presented a method to perform coherent occlusion culling for particle-based datasets, which is closely related to Deferred Splatting \cite{guennebaud2004deferred} and relies on temporal coherency.
+Grottel \textit{et al.} presented a method to perform coherent occlusion culling for particle-based datasets, which is closely related to Deferred Splatting \cite{guennebaud2004deferred} and relies on temporal coherency.
 Their particle data is stored in a uniform grid, and they operate the culling on two-levels: on the level of grid cells first, and on the atomic level afterwards.
 Individual atoms are rendered via 2D depth impostors, because they have a much lower vertex count than sphere meshes for the same results.
 At the beginning of each frame they render an early depth pass with atoms that were visible during the previous frame.
@@ -139,64 +135,44 @@ They construct the HZB from the incomplete depth buffer beforehand, and during t
 As the structures increase in size, they are also increasing in complexity, and it is necessary to display the data in the most suitable way.
 Ambient occlusion for instance has shown to be play an essential role when dealing with large molecular structures as it provides important depth cues which increase shape perception \cite{grottel2012object,eichelbaum2013pointao}.
 But the rendering style is not the only means to define visual encoding, and geometric modification may be applied too.
-Parulek et al.\cite{parulek2014continuous}, demonstrated a continuous level-of-detail scheme for molecular data.
+Parulek \textit{et al.}\cite{parulek2014continuous}, demonstrated a continuous level-of-detail scheme for molecular data.
 Their object-space approach offers detail-on-demand in the focus area while applying gradual shape simplification schemes elsewhere.
-On the finest level of detail they were showcasing SES surface representation and abstracted molecular shape of the distance.
+On the finest level of detail they were showcasing solvent excluded surface (SES) representation and abstracted molecular shape for distant molecule.
 They introduced an interesting abstraction approach, other than molecular surfaces, based union of spheres obtained via clustering methods.
 Several common clustering methods are evaluated and those that preserve elegantly the low-level shape details are highlighted.
 The continuous level-of-detail was only demonstrated on large molecules, and has not been extended to large multi-molecular scenes.
 This work is an attempt to extend the continuous level-of-detail to larger scales. %thus enabling illustrative visualization of large scenes that resemble artistic style of illustrations made by David Goodsell.
 
-\textbf{Modelling of Nucleic Acids Chains} DNA play an important role in cell biology and is an important part of our datasets too.
-Therefore as with protein data we must also provide efficient rendering methods for this type of structure.
-There are several scientific modeling tools \cite{macke1998modeling,lu20083dna} available that are able to generate DNA strands from a simple set of control points.
-More recently, Hornus et al. \cite{hornus2013easy} introduced GraphiteLifeExplorer, a DNA modelling tool especially designed for user input driven modeling of static DNA strands.
+\textbf{Modelling of Nucleic Acids Chains} DNA plays a key role in cell biology and is an important part of our datasets as well.
+Therefore, as with protein data we must also provide efficient rendering methods for this type of structure.
+There are several scientific modeling tools \cite{macke1998modeling,lu20083dna,hornus2013easy} available that are able to generate DNA strands from a simple set of control points. All of these approaches are performed on the CPU, which means that the bases position and
+rotation must be uploaded on the GPU prior to the rendering. Because of the cost of transferring data from CPU to GPU, however, this approach would likely perform poorly when rendering and animating large DNA strands. Therefore, we
+introduce a new GPU-based approach which relies on dynamic instancing of DNA bases pairs along a curve. This approach is similar to the work of Lampe \textit{et al.} [LVRH07], who use geometry shaders to dynamically instantiate residues along the protein backbone. The major difference here is the introduction of procedural building rules based on scientific data and the use of tessellation shaders instead of geometry, which offer a much greater bandwidth of injected primitives. Moreover, our approach can be extended and applied to any fiber or repetitive molecular object (Actine, Microtubule, lipoglycane, etc...) that are present in any cellular environment. This require to only change the procedural building rules and the building block.
 
-%Their approach aims for an artistic composition of 3D scenes and is therefore less accurate but faster than other methods.
-
-Via user input and manual Bezier curves editing tools they manage to recreate DNA strands and to export it in standard molecular structure format.
-The computation of the individual DNA bases is done interactively on the CPU.
-The resulting data, e.g. the position and rotation of the DNA bases, are uploaded on the GPU for fast rendering. 
-Foreseeing the need to render large dynamic DNA strands, this approach would likely perform poorly because of costly transfer times between CPU and GPU.
-%actually do some benchmark, however GraphiteLE use some LOD that quickly transform the sphere representation in ribbon.
-Therefore, we introduced a new GPU-based approach which relies on dynamics instancing of DNA bases along a curve. This technique saves a fairly large amount of precious GPU memory too, since only the control points must be stored instead of the entire chain of nucleic acids.
-This approach is similar to the work of Lampe et al.\cite{lampe2007two}, who used geometry shaders to dynamically instantiate residues along the protein backbone.
-%difference with what ?
-The major difference here is the introduction of procedural building rules based on scientific data and the use of tessellation shaders instead, which offer a much greater bandwidth of injected primitives. 
-Moreover, this approach can be extended and applied to any fiber or repetitive molecular object (Actine, Microtubule, lipoglycane, etc...) that are present in any cellular environement. This require to only change the procedural building rules and the builiding block.
 
 \textbf{Game Engines and Biomolecular Visualization} Game engines are becoming increasingly popular in the visualization community.
 Researcher have been seduced by their universal dimension and their ease of use, both in programming and deployment.
 In the domain of biomolecular visualization a few articles highlight the fact that they have used a game engine to develop their applications. 
-Shepherd et al. \cite{shepherd2014exploring} have developed a viewer to interactively view 3D genome data.
+Shepherd \textit{et al.} \cite{shepherd2014exploring} have developed an interactive application to showcase 3D genome data.
 Their visualization is multi-scale and is able to render a large amount of data thanks to the implementation of a level-of-detail scheme.
-Various works on interactive illustration of biological processes have also reported using game engines to visualize polymerization \cite{kolesar2014illustrating} and membrane crossings \cite{pacificvis15illustrative} in 3D and in real-time.
-%The idea of developing a tool for molecular visualization with a game engine is not novel.
-Similarly to our work, Baaden et al.\cite{lv2013game} developed a molecular viewer which offers artistic and illustrative rendering methods based on the Unity3D game engine.
+Various works on interactive illustration of biological processes have also reported using game engines to visualize polymerization \cite{kolesar2014illustrating} and membrane crossings \cite{pacificvis15illustrative}.It is also worth mentioning the Molecular Flipbook\cite{mfbook} a framework developed on top of the blender game engine. The Molecular Flipbook aim is to help scientific and illustrator to easily design, model, animate and share molecular machinery. 
+Similarly to our work, Baaden \textit{et al.}\cite{lv2013game} developed a molecular viewer which offers artistic and illustrative rendering methods based on the Unity3D game engine.
 Their primary intention was to democratize biomolecular visualization thanks to the use of a more intuitive and user friendly framework.
-Their tool, has managed to prove that game engines are also useful in serious visualization projects.  
-One noticeable technical difference between CellVIEW and UnityMol is that our tool is fully integrated in the "What you see is what you get" (WYSIWYG) editor of the Unity3D engine.
-Thus our tool coexists with the engine toolset which provides a rich set of functionalities which we can directly use to enhance the quality of our visualization. 
-Moreover, unityMol address the problem of vizualising one molecule at a time, while CellView addresses the problem of vizualising multiscale scenes with atom level complexity.
+All of theses tool has managed to prove that game engines are also useful in serious visualization projects. However, they show limitation for the visualization of larger scene at a cellular scale. For instance, unityMol focus on the rendering and the exploration of one molecule at a time. The Molecular Flipbook instead provide tools to animate and design more complex scene but it is limited to schematic representation (SES, cartoon) and will not be able to handle larger scene with atomic details. We developed CellVIEW to addresse the problem of vizualising multiscale scenes with atom level complexity. Moreover, one noticeable technical difference presents in CellVIEW is that our tool is fully integrated in the "What you see is what you get" (WYSIWYG) editor of the Unity3D engine.
+Thus our tool coexists with the engine toolset which provides a rich set of functionalities which we can directly use to enhance the quality of our visualization (e.g. Depth of fields, Image effect, Ambiant occlusion, etc...).
 
-$same here, we should do some benchmarking to justify our sentence. by simply trying to load the lipids bilayer, or make instance of the unity mol object.
+%we can also do a table comparison here. Theses software are available.
 
 %-------------------------------------------------------------------------
 \section{Efficient Occlusion Culling}
 
-The overwhelming size of the datasets (e.g. from millions to billions of atoms) calls for efficient means of occlusion culling for real time rendering.
-The presented method is closely related to the two-level occlusion culling introduced by Grottel et al.\cite{grottel2010coherent}, which was itself inspired from the Deffered Splating method \cite{guennebaud2004deferred}.
-We have revisited those methods to provide efficient occlusion culling for biomolecular datasets that are several orders of magnitude larger.
-Our rendering pipeline is based on the work of Le Muzic et al. \cite{le2014illustrative} which is designed for the rendering of large number of molecules.
-This method relies on the tessellation shaders to dynamically inject sphere primitives in the pipeline for each molecule. 
+The overwhelming size of the datasets (e.g. from millions to billions of atoms) calls for efficient methods of culling for when aiming at interactive render speeds. The presented method is closely related to the two-level occlusion culling introduced by Grottel \textit{et al.}\cite{grottel2010coherent}.
+We have revisited those methods to provide efficient occlusion culling for biomolecular datasets that are several orders of magnitude larger than the datasets used with their method. 
+%is that true ?
+Our rendering pipeline is based on the work of Le Muzic \textit{et al.} \cite{le2014illustrative} which is designed for the rendering of large number of molecules. This method relies on the tessellation shaders to dynamically inject sphere primitives in the pipeline for each molecule. 
 
 The heaviest part of the computation for this method is the geometry processing which is performed during the dynamic tessellation.
-In order to lighten the processing load, Le Muzic et al.\cite{le2014illustrative} suggested reducing the number of injected atoms according to the camera depth.
-However, without proper occlusion culling this computation would still be performed, even if a molecule is completely occluded.
-We use temporal coherency to determine hidden molecules in a given frame.
-To make sure that only visible geometries are sent to the renderer, we use a dynamic-sized render commands buffer.
-The size of the render commands buffer matches the number of visible molecules and is recomputed before each rendering operation.
-An overview of the required steps of our method is given in Figure \ref{fig:Picture7}, and the steps are layed down as follow: \\
+In order to lighten the processing load, Le Muzic \textit{et al.}\cite{le2014illustrative} reduced the number of injected atoms according to the camera depth. However, without proper occlusion culling this computation, although reduced, would still be performed, even if a molecule is completely occluded. We use temporal coherency to determine hidden molecules in a given frame. To ensure that only visible geometries are sent to the renderer, we use a dynamic-sized render commands buffer that matches the number of visible molecules and is recomputed before each rendering operation. The steps of our method consist in :
 
 \begin{enumerate}
 \item Draw visible molecules at frame t - 1
@@ -206,28 +182,30 @@ An overview of the required steps of our method is given in Figure \ref{fig:Pict
 \item Read visibility from item buffer
 \item Fetch colors from item buffer
 \end{enumerate}
-\subsection{Render Commands}
 
-%Information relative th the individual molecules such as position, rotation, type and others is stored in large static buffer directly on the GPU.
-%Additionally we also store of boolean flag on the in the same way and which is used to determine the visibility of a molecule.
+
+\subsection{Render Commands}
 
 Our pipeline is designed so that the visibility of a molecule is already known prior to rendering.
 A naive approach to discarding hidden molecules would be to do it in the early stages of the rendering in the vertex shader, prior to dynamic tessellation. 
 However, discarding elements in the vertex shader would cause unnecessary processing overhead.
 We use render commands instead to ensure that only visible molecules will be sent to the renderer.
 The render commands are recomputed before every render operation.
-For every visible molecule we issue and render command entry to the buffer via stream output.
-Resulting size of the commands buffer therefore matches the number of visible molecules.
-Each buffer entry simply contains the id of the corresponding molecule, which serves during the rendering as an index to fetch the needed information. The needed information consist in position, rotation, type and also corresponding atoms coordinates and type or radius for the dynamic tessellation. 
+For every visible molecule we issue a render command entry to the buffer via stream output.
+The resulting size of the commands buffer therefore matches the number of visible molecules.
+Each buffer entry simply contains the id of the corresponding molecule, which serves during the rendering as an index to fetch the needed information. The needed information consist in position, rotation, type and also corresponding atoms type, radius and coordinates for the dynamic tessellation. 
 
 \subsection{Temporal coherency}
 
 The key to our culling method is the use of temporal coherency to determine hidden molecules.
 The rendering process generates an item buffer texture which contains the id of the visible molecules instead of the color.
-We process this texture and the end of each frame in order to determine the visible molecules.
+We process this texture at the end of each frame in order to determine the visible molecules.
 These molecules are then drawn at the beginning of the next frame by issuing one render command per visible molecule.
-The resulting depth buffer is then used to query the visibility of the remaining molecules. For comparison, Grottel at al. were using HOQ for this task. 
-%What is HOQ?
+
+The render results are thus incomplete and only contains molecules that were previously visible. To query the visibility of the remaining molecules we generate a HZB buffer from the incomplete depth buffer which we previously rendered. We subsequently determine the occlusion of the remaining molecules and generate render commands for the visible ones. The remaining molecules are finally rendered, thus completing the depth and id buffer, which are then used
+to determine the visible elements for the next frame.
+
+The resulting depth buffer is then used to query the visibility of the remaining molecules. For comparison, Grottel \textit{at al.} were using HOQ for this task. 
 The HOQ approach will cause a GPU driver overhead in the case of millions of proteins (billions of atoms), which would very likely cause a severe bottleneck in our pipeline.
 %any way to justisy this statement ?
 We implemented an occlusion culling technique named N-Buffers \cite{decoret2005n} instead, which is a variant of the well known hierarchical z-buffer (HZB) culling method \cite{greene1993hierarchical}. 
@@ -400,7 +378,7 @@ The data was obtained with CellPACK \cite{johnson2015cellpack}, a modeling tool 
  CellPACK summarizes and incorporates the most recent knowledge obtained from structural biology and system biology to generate comprehensive mesoscale models.
 For instance, based on experimentally obtained data (e.g. data such as proteins structure, concentration and spatial distribution), they managed to generate a whole model of the HIV virus via a packing method based on collisions constraints\cite{johnson2015hiv}. 
 They also compare their results with fluorescence microscopy images of real organisms to validate their results.
-In addition to CellPACK, we have used the program LipidsWrapper\cite{lipidwrapper} to generate complete and accurate lipids membrane bilayer for each dataset generated by CellPACK.
+In addition to CellPACK, we have used the program LipidsWrapper\cite{durrant2014lipidwrapper} to generate complete and accurate lipids membrane bilayer for each dataset generated by CellPACK.
 
 Our program reads the files that are generated by the tool and is able to reconstruct the scene in a multiscale approach.
 The generated files comprise of a list of elements, namely the name, position, rotation and PDB identifier \cite{sussman1998protein}.
