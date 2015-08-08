@@ -23,7 +23,7 @@
 \begin{document}
 
 \teaser{
-\includegraphics[width=\linewidth]{Figures/teaser}
+\includegraphics[width=\linewidth]{Figures/P1.PNG}
 \centering
 \caption{Real-time screen-shot from our application, an illustrative cross-section of the HIV virus surrounded by blood plasma. Our rendering tool is directly integrated in the Unity3D game engine and is able to render datasets with up to 15 billion atoms smoothly at 60Hz and in high resolution. Because the dataset is rather complex we opted for an illustrative rendering style to improve shape perception and which was inspired by the work of scientific illustrators.}
 \label{fig:teaser}
@@ -89,19 +89,10 @@ Thus, we also extend our method to generate large strands of nucleic acids on-th
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{Figures/Untitled}
+\includegraphics[width=\linewidth]{Figures/P2.PNG}
 \caption{An illustration of David Goodsell depicting a cross section of a Mitochondrion. Given the complexity of the scene the artist deliberately chose to render molecules with highly abstracted shapes.}
 \label{fig:David-S}
 \end{figure}
-
-\begin{figure*}
-\centering
-\includegraphics[width=0.9\linewidth]{Figures/Picture7}
-\caption{The work-flow of our efficient culling method. The blue squares represents GPU buffers or textures and the grey squares represents the different steps of our method.
-The color buffer is the final buffer which will be displayed on the screen. We accelerate rendering process by using a conservative depth output and by only writing the id of the molecules during the render.
-Therefore we are able to reuse the results of the early depth pass and avoid rendering the same geometries twice.}
-\label{fig:Picture7}
-\end{figure*}
 
 \textbf{Large-scale Molecular Visualization} Lindow \textit{et al.} \cite{lindow2012interactive} have first introduced a method capable of quickly rendering large-scale atomic data consisting of several billions of atoms on commodity hardware. Rather than transferring the data from CPU to GPU every frame, they store the structure of each type of molecule only once and utilize instancing to repeat these structures in the scene.
 For each type of protein a 3D grid structure containing the atoms positions is created and then stored on the GPU memory.
@@ -238,7 +229,7 @@ second variant when dealing with very large datasets.
 
 \begin{figure}
 \centering
-\includegraphics[width=0.4\linewidth]{Figures/Picture5}
+\includegraphics[width=0.4\linewidth]{Figures/P3}
 \caption{Depth conservative sphere impostors, in order to benefit from early depth culling for depth impostors we must guaranty that the output depth will be greater than the depth of the billboard.}
 \label{fig:Picture5}
 \end{figure}
@@ -290,14 +281,14 @@ A side-by-side comparison between our illustrative LOD compared to full atomic d
 %I would like to add a fifth level representing 1/2 spheres per molecules. And a second row with a larger molecule
 \begin{figure}
 \centering
-\includegraphics[width=0.8\linewidth]{Figures/Picture4}
+\includegraphics[width=0.8\linewidth]{Figures/P4.PNG}
 \caption{Our level-of-detail scheme allows to greatly reduce the number of sphere primitives. From left to right, the protein is shown with (i) full-atomic detail, (ii) only 15 percent of the overall sphere count, (iii) 5 percent and (iv) 0.5 percent. The LOD scheme reduce the number of spheres from 10182 to 50 while preserving the overall shape of the protein. The shape of individual spheres is more highlighted in this figure compared to our application for a clearer depiction of the LOD.}
 \label{fig:Picture4}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=0.8\linewidth]{Figures/Picture9}
+\includegraphics[width=0.8\linewidth]{Figures/P5.PNG}
 \caption{Side-by-side comparison of our illustrative LOD compared with full atomic details. Our illustrative LOD provides smoother and elegant shapes, while also reducing the processing load.}
 \label{fig:Picture9}
 \end{figure}
@@ -307,7 +298,7 @@ A side-by-side comparison between our illustrative LOD compared to full atomic d
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth]{Figures/Picture10}
+\includegraphics[width=1\linewidth]{Figures/P6.PNG}
 \caption{Procedural generation of B-DNA structures via GPU dynamic tessellation. In the first image we can see the position of the individual bases. The color gradient highlight the individual segments. In the second image we draw the smooth normals along the curve, the color desaturation shows the direction of the vector. The third image shows the rotation offset of the normal vector along the tangent, and the last image shows the final result.
 }
 \label{fig:Picture10}
@@ -375,10 +366,10 @@ We did not find this to be visually disturbing, probably because consecutive seg
 
 %-------------------------------------------------------------------------
 \section{Perks and Limitations of a Game Engine}
-Although game engines may not yet be the perfect all-in-one solution, they are good contenders to generic visualization frameworks. Above all, they offer ease of access to GPU features for fast computation, while remaining user friendly. CellVIEW is implemented in Unity3D, one of the most popular game creation framework. The engine uses C# as a scripting language and also supports a large array of platforms from desktop PCs to mobile devices. It is worth mentioning that the Unity3D engine is free of charge for the personal edition and thus is accessible to anyone. In this section we briefly review the perks and limitations of the engine when used as a development platform for scientific visualization.
+Although game engines may not yet be the perfect all-in-one solution, they are good contenders to generic visualization frameworks. Above all, they offer ease of access to GPU features for fast computation, while remaining user friendly. CellVIEW is implemented in Unity3D, one of the most popular game creation framework. The engine uses \texttt{C\#} as a scripting language and also supports a large array of platforms from desktop PCs to mobile devices. It is worth mentioning that the Unity3D engine is free of charge for the personal edition and thus is accessible to anyone. In this section we briefly review the perks and limitations of the engine when used as a development platform for scientific visualization.
 
 \subsection{What We Liked}
-\textbf{Scripting} The language which is used for coding with Unity3D is C#, while the engine is internally coded in C++. The simplicity of C# makes it a great language for quick prototyping over C++. Also, C# is more accessible to enthusiast programmers than C++, which makes our tool more accessible. Deployment is also easier since our project only consists of a few scripts while the heavy software part is actually
+\textbf{Scripting} The language which is used for coding with Unity3D is \texttt{C\#}, while the engine is internally coded in C++. The simplicity of \texttt{C\#} makes it a great language for quick prototyping over C++. Also, \texttt{C\#} is more accessible to enthusiast programmers than C++, which makes our tool more accessible. Deployment is also easier since our project only consists of a few scripts while the heavy software part is actually
 inside the engine itself.
 
 \textbf{Editor} The game engine features a WYSIWYG editor, which is a great tool for artistic setup because it offers a real-time preview of the application. Additionally the editor features a large array of features which we may use out-the-box in our visualization such as high quality image effects for instance (SSAO, Depth-of-field, etc.). The editor also features UI extension capabilities, which we use
@@ -401,8 +392,8 @@ process of compiling a program to an actual executable file is only a matter of 
 
 \subsection{What We Did Not Like}
 \textbf{CPU Performance} CPU performance might be strongly affected
-with the use of a C# scripting engine compared to native
-C++. While modern C#/.NET framework makes considerable
+with the use of a \texttt{C\#} scripting engine compared to native
+C++. While modern \texttt{C\#}/.NET framework makes considerable
 steps towards multi-platform and close to native performance,
 Unity3D still features a scripting engine which is
 largely out of date. This is why we would not recommend it
@@ -446,10 +437,26 @@ It is rather hard to precisely evaluate the performance of a system which is bas
 level-of-detail to improve render speeds, in our tests we paid a special attention not to compromise image quality when setting up LOD parameters. Above 15 billion atoms we can hardly guaranty a smooth framerate above 60 fps from any viewing angle, however it would still be possible to render even larger structures at decent interactive framerates. However we start to question the utility of this approach to display datasets that would be one or several orders of magnitude
 higher. Indeed, when viewing large datasets as a whole, the view starts to exhibit graining aliasing artefacts due to the very small size of individual molecules. While image quality could be improved with anti-aliasing techniques, the issue would still persist for larger zooming scale. What would be truly needed at this scale is a new type of representation for this data that would reduce the amount of displayed geometries and also provide a clearer view of the scene.
 
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{Figures/P7.PNG}
+\caption{The results of our rendering test, showing DNA from Mycoplasma mycoide on the left and HIV in blood plasma on the right.
+The first dataset has approximatively 11 million atoms and the second one approximatively 15 billion.
+}
+\label{fig:P7}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{Figures/P8.PNG}
+\caption{Preliminary results of the Mycoplasma model. The model additionally features proteins, RNA and lycosomes.}
+\label{fig:P8}
+\end{figure}
+
 \textbf{Mycoplsama} To fully demonstrate the use of our dynamic building rules for DNA, we use the data from Mycoplasma mycoide, one of the smallest bacteria with a genome of 1,211,703 baise pairs.
 Mycoplsama has been widely studied by biologists, and was the first organism to be fully synthetized\cite{mycosync}.
 For this dataset we are only showcasing a preliminar model build with CellPACK and containing only a quarter of the total genome. 
-This dataset comprise a set of 9617 control points defining the overall path of the DNA and the PDB reference for the nucleic acids base pair to be instanced along the path for an overall number of 11,619,195 atoms and the results can be seen in Figure 7.We were able to render and procedurally generate the entire strands at 70 fps without any LOD schemes. With this test we simply wanted to show the computation times to proof the efficiency of our technique. Naturally, when using LOD and culling schemes like with protein data, the performance would considerably increase and would not impact the rest of the computation. The results of the two datasets are shown in Figure 7, and a preliminary render of the Mycoplasma is show in Figure 8.
+This dataset comprise a set of 9617 control points defining the overall path of the DNA and the PDB reference for the nucleic acids base pair to be instanced along the path for an overall number of 11,619,195 atoms and the results can be seen in \ref{fig:P7}. We were able to render and procedurally generate the entire strands at 70 fps without any LOD schemes. With this test we simply wanted to show the computation times to proof the efficiency of our technique. Naturally, when using LOD and culling schemes like with protein data, the performance would considerably increase and would not impact the rest of the computation. The results of the two datasets are shown in \ref{fig:P7}, and a preliminary render of the Mycoplasma is show in \ref{fig:P8}.
 
 \subsection{Discussion}
 
