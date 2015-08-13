@@ -397,16 +397,16 @@ HIV & 22797450 & 10.133-30 & 41.800-30 & 12.200-XX & 42.600  \\%& 0 & 0  \\
 HIV+membrane & 22797450 & 15.333 & 30.733 & 18.233 & 29.433  \\%& 0 & 0  \\
 HIV+membrane+rna & 23204250 & 13.100 & 28.733 & 14.100 & 30.467  \\%& 0 & 0  \\
 HIV+membrane+rna and blood plasma  & 71202057 & 3 & 10 & 3 &  10  \\%& 0 &  0  \\
-HIV+Blood*72     & 4601691705 & n/a  & 23.033 & n/a &  24  \\%& 8 &  7  \\
+HIV+Blood*4x     & 4601691705 & n/a  & 23.033 & n/a &  24  \\%& 8 &  7  \\
+HIV+Blood*10x     & 70866052257 & n/a  & 2.667 & n/a & 3.233  \\%& 8 &  7  \\ 3.733 with cross section
 Mycoplasma DNA          & 6 & 2 & 1 & 3 &  7  \\%& 8 &  7  \\
 Mycoplasma membrane          & 6 & 2 & 1 & 3 &  7  \\%& 8 &  7  \\
-Mycoplasma           & 6 & 2 & 1 & 3 &  7  \\%& 8 &  7  \\
-prototype ecoli     & 6 & 2 & 1 & 3 &  5  \\% & 8 &  7  \\
+Mycoplasma           & 55253945 & 2.667 & 5.067 & 2.633 &  5.333 \\%& 8 &  7  \\
+prototype ecoli     & 1291949634 & n/a & 8.967 & n/a &  7.033  \\% & 8 &  7.033  \\
 \end{tabular}
   \caption{Result comparison for each dataset used in our study. The total number of atoms (nbAtoms) is in the first column, and the performance achieve for different optimization techniques are presented for two hardware in fps (average measured over 30 seconds on a GeForce GT650M and GeForce TITAN X) from left to right as : \textbf{Rough} no optimization, \textbf{LOD} only, \textbf{Culling} only and LOD associated with Culling. }
 \label{tab:1}
 \end{table*}
-
 
 The Table \tablename{1} resume the information of the datasets used, their size in number of atoms and the obtained framerate for the different techniques we employed.
 
@@ -457,6 +457,15 @@ This dataset comprise a set of 9617 control points defining the overall path of 
 \section{Discussion}
 \subsection{Performance}
 Discuss here based on the intra-performance table, the pro/cons of the culling, tesselation, and LOD. On my laptop the culling for 1billions atoms is flashing.
+
+\textbf{Tesselation} Advantage other geometry shader only
+
+\textbf{Culling} Only 1fps ? is it worth it ? can't we spend this computing time on something else
+
+\textbf{LOD} Need a fourth level or even higher cite guo for possible improvement. Accentutate the arbitrary choice given the data.
+
+\textbf{Unity} How discuss graphics performance for our case inside unity ? could we get better performance in other platform ? (panda3d, unreal, amira, graphite etc..)
+
 
 \subsection{Use cases}
 Domain experts who have experimented with cellVIEW have responded favorably and with great enthusiasm. Prior to cellVIEW, visualizing this type of data was cumbersome for the experts and as the scale increased, it was often not possible to view large models with all structures turned on with a standard computer. cellVIEW now provides state-of-the-art techniques to accomplish this task. Some experts were dismayed that cellVIEW could not yet be implemented in their lab's preferred or homemade visualization toolsets (i.e., not simply a python or \texttt{C++} library they could access), but most had some experience working with the Unity 3D framework, so the transition to this standalone tool was sufficient. cellPACK users have frequently requested the ability render the fluorescent microscopy simulator representation of the scene. This simulator runs as a standalone Python script (black box that returns static images after processing), but cellVIEW can now generate the same representation in realtime, enabling the researcher to rotate the model to understand the potential relationships of the fluorescent markers modeled in 3D to the 2D images produced by super-resolution microscopes. This type of representation is very useful for comparing and validating modeled with real microscopy images. For large biological structures, such as Mycoplasma mycoides, the cellPACK viewers are currently unable to visualize the complete models produced by the packing algorithm. Because cellVIEW can handle Mycoplasma and larger models in atomic detail and with ease, it is evident that cellVIEW will become a critical tool for cellPACK users who wish to explore multi-scale modeling extremes such whole bacterial cells and ultimately whole mammalian cells.
